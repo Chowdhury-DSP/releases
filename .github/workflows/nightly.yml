@@ -14,6 +14,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
     - name: Install SDKs
       uses: actions/checkout@v2
       with:
@@ -48,6 +51,9 @@ jobs:
       INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
 
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
     - name: Install SDKs
       uses: actions/checkout@v2
       with:
@@ -68,9 +74,7 @@ jobs:
       run: sudo installer -pkg /Volumes/Packages\ 1.2.9/Install\ Packages.pkg -target /
 
     - name: Install npm packages
-      run: |
-        npm install -g npx
-        npm install -g notarize-cli
+      run: npm install -g notarize-cli
 
     - name: Setup temporary keychain and add installer signing certificate
       uses: apple-actions/import-codesign-certs@v1

@@ -63,7 +63,6 @@ mkdir $pkg_dir
 productsign -s "$TEAM_ID" build/ChowCentaur.pkg $pkg_dir/ChowCentaur-signed.pkg
 
 echo "Notarizing installer package..."
-INSTALLER_PASS=$(more ~/Developer/mac_installer_pass)
 npx notarize-cli --file $pkg_dir/ChowCentaur-signed.pkg --bundle-id com.chowdsp.ChowCentaur --username chowdsp@gmail.com --password "$INSTALLER_PASS"
 
 echo "Building disk image..."

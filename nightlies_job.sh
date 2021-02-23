@@ -62,6 +62,7 @@ echo "Pushing git commit to trigger update..."
 password=$(more ~/git_pass)
 git commit -am "Test commit" # "$git_commit_msg"
 # git remote set-url origin "https://jatinchowdhury18:$password@github.com/Chowdhury-DSP/releases.git"
+echo "$password"
 git push -u https://jatinchowdhury18:$password@github.com/Chowdhury-DSP/releases.git main
 
 echo "FINISHED"

@@ -92,4 +92,5 @@ jobs:
       # if: contains(toJson(github.event.commits), 'ChowCentaur')
       run: bash plugins/ChowCentaur/mac_build.sh ${{ github.APPLE_TEAM_ID }}
       env:
+        TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}

@@ -9,11 +9,7 @@ SDK_PATH="$(pwd)/SDKs"
 name=$(jq -r '.name' "$DIR/metadata.json")
 repo=$(jq -r '.repo' "$DIR/metadata.json")
 hash=$(jq -r '.hash' "$DIR/metadata.json")
-echo "$name"
-echo "$repo"
-echo "$hash"
-echo "$DIR"
-more "$DIR/metadata.json"
+echo "Pulling $name from $repo at commit $hash"
 
 git clone "$repo" "$name"
 cd "$name"

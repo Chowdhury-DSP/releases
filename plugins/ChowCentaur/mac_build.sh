@@ -2,6 +2,7 @@
 
 set -e
 
+TEAM_ID=$1
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"
 

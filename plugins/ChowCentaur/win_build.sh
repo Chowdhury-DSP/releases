@@ -4,6 +4,7 @@ set -e
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"
+VST_SDK="D:${SDK_PATH:2}/VST2_SDK"
 
 # clone git repo
 name=$(jq -r '.name' "$DIR/metadata.json")
@@ -17,7 +18,7 @@ git checkout "$hash"
 git submodule update --init --recursive
 
 # set up SDK paths
-sed -i -e "19s~.*~juce_set_vst2_sdk_path(${SDK_PATH}/VST2_SDK/)~" CMakeLists.txt
+sed -i -e "19s~.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
 sed -i -e "20s~.*~include_directories(${SDK_PATH}/ASIO_SDK/common)~" CMakeLists.txt
 sed -i -e '5s/#//' ChowCentaur/CMakeLists.txt
 sed -i -e '42s/#//' ChowCentaur/CMakeLists.txt

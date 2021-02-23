@@ -59,5 +59,7 @@ do
 done
 
 echo "Pushing git commit to trigger update..."
-git commit -am $git_commit_msg
-git push
+git commit -am "$git_commit_msg"
+git push origin main
+
+echo "FINISHED"

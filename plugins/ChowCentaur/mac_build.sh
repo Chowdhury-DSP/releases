@@ -6,9 +6,15 @@ DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"
 
 # clone git repo
-name=$(jq -r '.namerepo' "$DIR/metadata.json")
+name=$(jq -r '.name' "$DIR/metadata.json")
 repo=$(jq -r '.repo' "$DIR/metadata.json")
 hash=$(jq -r '.hash' "$DIR/metadata.json")
+echo "$name"
+echo "$repo"
+echo "$hash"
+echo "$DIR"
+more "$DIR/metadata.json"
+
 git clone "$repo" "$name"
 cd "$name"
 git checkout "$hash"

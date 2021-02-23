@@ -53,7 +53,7 @@ if [[ "$update_needed" == "1" ]]; then
 fi
 
 git_commit_msg="Update Nightlies:"
-for plugin in $plugins_to_update
+for plugin in "${plugins_to_update[@]}"
 do
     git_commit_msg="$git_commit_msg $plugin"
 done
@@ -62,5 +62,22 @@ echo "Pushing git commit to trigger update..."
 password=$(cat ~/git_pass)
 git commit -am "$git_commit_msg"
 git push -u https://jatinchowdhury18:$password@github.com/Chowdhury-DSP/releases.git main
+
+sleep 60m
+
+password=$(cat ~/ccrma_pass)
+ssh_cmd="sshpass -p $password ssh -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu"
+scp_cmd="sshpass -p $password scp -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu:"
+ssh_dir="~/Library/Web/chowdsp/nightly_plugins"
+
+rm -f ~/Web/chowdsp/nightly_plugins/*
+
+for p in "${plugins_to_update[@]}"; do
+    $scp_cmd$ssh_dir/$p-Mac* ~/Web/chowdsp/nightly_plugins/
+    $scp_cmd$ssh_dir/$p-Win* ~/Web/chowdsp/nightly_plugins/
+    
+    $ssh_cmd "rm $ssh_dir/$p-Mac*"
+    $ssh_cmd "rm $ssh_dir/$p-Win*"
+done
 
 echo "FINISHED"

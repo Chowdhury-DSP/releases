@@ -60,7 +60,8 @@ done
 
 echo "Pushing git commit to trigger update..."
 git commit -am "Test commit" # "$git_commit_msg"
-git remote -v
+git config user.email jatinchowdhury18
+git config user.name "Jatin Chowdhury"
 git push origin main
 
 echo "FINISHED"

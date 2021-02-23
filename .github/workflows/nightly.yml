@@ -17,7 +17,7 @@ jobs:
     - name: Install SDKs
       uses: actions/checkout@v2
       with:
-        repository: Chowdhury-DSP/Plugin_SDKs
+        repository: Chowdhury-DSP/Plugins_SDKs
         path: SDKs
         token: ${{ secrets.OUR_GITHUB_PAT }}
 
@@ -51,7 +51,7 @@ jobs:
     - name: Install SDKs
       uses: actions/checkout@v2
       with:
-        repository: Chowdhury-DSP/Plugin_SDKs
+        repository: Chowdhury-DSP/Plugins_SDKs
         path: SDKs
         token: ${{ secrets.OUR_GITHUB_PAT }}
 

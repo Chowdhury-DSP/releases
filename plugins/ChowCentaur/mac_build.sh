@@ -10,6 +10,7 @@ name=$(jq -r '.name' "$DIR/metadata.json")
 repo=$(jq -r '.repo' "$DIR/metadata.json")
 hash=$(jq -r '.hash' "$DIR/metadata.json")
 echo "Pulling $name from $repo at commit $hash"
+echo "$TEST_ENV_VAR"
 
 git clone "$repo" "$name"
 cd "$name"

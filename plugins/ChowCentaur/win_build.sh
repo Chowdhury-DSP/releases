@@ -57,4 +57,4 @@ echo "Building..."
 iscc $script_file
 
 # copy installer to products
-cp Installers/windows/exec="ChowCentaur-Win-$version.exe" ../products/
+cp Installers/windows/"ChowCentaur-Win-$version.exe" ../products/

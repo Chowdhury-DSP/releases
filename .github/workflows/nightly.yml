@@ -92,6 +92,13 @@ jobs:
         p12-file-base64: ${{ secrets.MAC_CERTIFICATES_BASE64 }}
         p12-password: ${{ secrets.MAC_CERTIFICATES_PASS }}
 
+    - name: Setup temporary keychain and add installer signing certificate
+      uses: apple-actions/import-codesign-certs@v1
+      with: 
+        p12-file-base64: ${{ secrets.MAC_INSTALLER_CERTIFICATES_BASE64 }}
+        p12-password: ${{ secrets.MAC_CERTIFICATES_PASS }}
+        create_keychain: 'false'
+
     - name: Setup Products directory
       run: mkdir products
 

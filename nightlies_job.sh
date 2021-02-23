@@ -66,18 +66,30 @@ git push -u https://jatinchowdhury18:$password@github.com/Chowdhury-DSP/releases
 sleep 60m
 
 password=$(cat ~/ccrma_pass)
-ssh_cmd="sshpass -p $password ssh -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu"
+ssh_cmd="sshpass -p $password ssh -q -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu"
 scp_cmd="sshpass -p $password scp -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu:"
 ssh_dir="~/Library/Web/chowdsp/nightly_plugins"
 
-rm -f ~/Web/chowdsp/nightly_plugins/*
-
 for p in "${plugins_to_update[@]}"; do
-    $scp_cmd$ssh_dir/$p-Mac* ~/Web/chowdsp/nightly_plugins/
-    $scp_cmd$ssh_dir/$p-Win* ~/Web/chowdsp/nightly_plugins/
-    
-    $ssh_cmd "rm $ssh_dir/$p-Mac*"
-    $ssh_cmd "rm $ssh_dir/$p-Win*"
+    if $ssh_cmd stat $ssh_dir/$p-Mac* \> /dev/null 2\>\&1
+        then
+            echo "Nightly update found for $p Mac"
+            rm -f ~/Web/chowdsp/nightly_plugins/$p-Mac*
+            $scp_cmd$ssh_dir/$p-Mac* ~/Web/chowdsp/nightly_plugins/
+            $ssh_cmd "rm $ssh_dir/$p-Mac*"
+        else
+            echo "No Nightly update found for $p Mac"
+    fi
+
+    if $ssh_cmd stat $ssh_dir/$p-Win* \> /dev/null 2\>\&1
+        then
+            echo "Nightly update found for $p Win"
+            rm -f ~/Web/chowdsp/nightly_plugins/$p-Win*
+            $scp_cmd$ssh_dir/$p-Win* ~/Web/chowdsp/nightly_plugins/
+            $ssh_cmd "rm $ssh_dir/$p-Win*"
+        else
+            echo "No Nightly update found for $p Win"
+    fi
 done
 
 echo "FINISHED"

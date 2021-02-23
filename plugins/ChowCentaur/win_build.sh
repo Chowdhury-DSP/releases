@@ -46,7 +46,7 @@ cp -R "build32/${name}/${name}_artefacts/Release/VST3/${name}.vst3" "bin/Win32/$
 
 # create installer
 echo "Creating installer..."
-script_file=Installer/windows/ChowCentaur_Install_Script.iss
+script_file=Installers/windows/ChowCentaur_Install_Script.iss
 
 version=$(cut -f 2 -d '=' <<< "$(grep 'CMAKE_PROJECT_VERSION:STATIC' build/CMakeCache.txt)")
 echo "Setting app version: $version..."
@@ -57,4 +57,4 @@ echo "Building..."
 iscc $script_file
 
 # copy installer to products
-cp Installer/windows/exec="ChowCentaur-Win-$version.exe" ../products/
+cp Installers/windows/exec="ChowCentaur-Win-$version.exe" ../products/

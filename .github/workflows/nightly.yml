@@ -10,7 +10,7 @@ on:
 jobs:
   windows_release:
     name: Windows Nightly Release
-    # if: contains(toJson(github.event.commits), 'Update Nightlies')
+    if: contains(toJson(github.event.commits), 'Update Nightlies')
     runs-on: windows-latest
 
     steps:
@@ -42,12 +42,22 @@ jobs:
     #   uses: mxschmitt/action-tmate@v3
 
     - name: Build ChowCentaur
-      # if: contains(toJson(github.event.commits), 'ChowCentaur')
+      if: contains(toJson(github.event.commits), 'ChowCentaur')
       run: bash plugins/ChowCentaur/win_build.sh
+
+    - name: Deploy Nightly Builds
+      uses: appleboy/scp-action@master
+      with:
+        host: ccrma-gate.stanford.edu
+        username: jatin
+        password: ${{ secrets.CCRMA_PASS }}
+        source: "products/*"
+        target: "~/Library/Web/chowdsp/nightly_plugins"
+        strip_components: 1
 
   macos_release:
     name: Mac Nightly Release
-    # if: contains(toJson(github.event.commits), 'Update Nightlies')
+    if: contains(toJson(github.event.commits), 'Update Nightlies')
     runs-on: macos-latest
 
     steps:
@@ -89,7 +99,7 @@ jobs:
     #   uses: mxschmitt/action-tmate@v3
 
     - name: Build ChowCentaur
-      # if: contains(toJson(github.event.commits), 'ChowCentaur')
+      if: contains(toJson(github.event.commits), 'ChowCentaur')
       run: bash plugins/ChowCentaur/mac_build.sh
       env:
         TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}

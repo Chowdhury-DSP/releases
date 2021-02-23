@@ -38,8 +38,8 @@ jobs:
     - name: Setup Products directory
       run: mkdir products
 
-    - name: Setup debug session
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup debug session
+    #   uses: mxschmitt/action-tmate@v3
 
     - name: Build ChowCentaur
       # if: contains(toJson(github.event.commits), 'ChowCentaur')
@@ -90,7 +90,7 @@ jobs:
 
     - name: Build ChowCentaur
       # if: contains(toJson(github.event.commits), 'ChowCentaur')
-      run: bash plugins/ChowCentaur/mac_build.sh ${{ github.APPLE_TEAM_ID }}
+      run: bash plugins/ChowCentaur/mac_build.sh
       env:
         TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}

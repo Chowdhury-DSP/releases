@@ -1,0 +1,84 @@
+name: Nightly
+
+on:
+  push:
+    branches:
+    - main
+
+  workflow_dispatch:
+
+jobs:
+  windows_release:
+    name: Windows Nightly Release
+    # if: contains(toJson(github.event.commits), 'Update Nightlies')
+    runs-on: windows-latest
+
+    steps:
+    - name: Install SDKs
+      uses: actions/checkout@v2
+      with:
+        repository: Chowdhury-DSP/Plugin_SDKs
+        path: SDKs
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Setup NuGet.exe
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: latest
+
+    - name: Install Inno Setup
+      run: nuget install innosetup
+
+    - name: Setup Products directory
+      run: mkdir products
+
+    - name: Build ChowCentaur
+      # if: contains(toJson(github.event.commits), 'ChowCentaur')
+      run: bash plugins/ChowCentaur/win_build.sh
+
+  macos_release:
+    name: Mac Nightly Release
+    # if: contains(toJson(github.event.commits), 'Update Nightlies')
+    runs-on: macos-latest
+    env:
+      TEAM_ID: ${{ github.APPLE_TEAM_ID }}
+      INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
+
+    steps:
+    - name: Install SDKs
+      uses: actions/checkout@v2
+      with:
+        repository: Chowdhury-DSP/Plugin_SDKs
+        path: SDKs
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Download Packages installer build tool
+      run: wget http://s.sudre.free.fr/Software/files/Packages.dmg
+
+    - name: Mount Packages image
+      run: hdiutil attach Packages.dmg
+
+    - name: Install Packages
+      run: sudo installer -pkg /Volumes/Packages\ 1.2.9/Install\ Packages.pkg -target /
+
+    - name: Install npm packages
+      run: |
+        npm install -g npx
+        npm install -g notarize-cli
+
+    - name: Setup temporary keychain and add installer signing certificate
+      uses: apple-actions/import-codesign-certs@v1
+      with: 
+        p12-file-base64: ${{ secrets.MAC_CERTIFICATES_BASE64 }}
+        p12-password: ${{ secrets.MAC_CERTIFICATES_PASS }}
+
+    - name: Setup Products directory
+      run: mkdir products
+
+    - name: Build ChowCentaur
+      # if: contains(toJson(github.event.commits), 'ChowCentaur')
+      run: bash plugins/ChowCentaur/mac_build.sh

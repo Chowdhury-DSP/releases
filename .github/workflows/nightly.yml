@@ -46,14 +46,13 @@ jobs:
       run: bash plugins/ChowCentaur/win_build.sh
 
     - name: Deploy Nightly Builds
-      uses: appleboy/scp-action@master
+      uses: garygrossgarten/github-action-scp@release
       with:
-        host: ccrma-gate.stanford.edu
+        local: products
+        remote: ~/Library/Web/chowdsp/nightly_plugins
+        host: ccrma.stanford.edu
         username: jatin
         password: ${{ secrets.CCRMA_PASS }}
-        source: "products/*"
-        target: "~/Library/Web/chowdsp/nightly_plugins"
-        strip_components: 1
 
   macos_release:
     name: Mac Nightly Release
@@ -111,3 +110,12 @@ jobs:
       env:
         TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
+
+    - name: Deploy Nightly Builds
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: products
+        remote: ~/Library/Web/chowdsp/nightly_plugins
+        host: ccrma.stanford.edu
+        username: jatin
+        password: ${{ secrets.CCRMA_PASS }}

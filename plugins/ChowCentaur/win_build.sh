@@ -23,11 +23,11 @@ sed -i -e '5s/#//' ChowCentaur/CMakeLists.txt
 sed -i -e '42s/#//' ChowCentaur/CMakeLists.txt
 
 # build Win64
-cmake -Bbuild -G"Visual Studio 16 2019 -A x64"
+cmake -Bbuild -G"Visual Studio 16 2019" -A x64
 cmake --build build --config Release --parallel
 
 # build Win32
-cmake -Bbuild32 -G"Visual Studio 16 2019 -A Win32"
+cmake -Bbuild32 -G"Visual Studio 16 2019" -A Win32
 cmake --build build32 --config Release --parallel
 
 # copy builds to bin

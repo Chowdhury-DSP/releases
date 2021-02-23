@@ -28,7 +28,7 @@ cmake -Bbuild -GXcode -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY="Developer ID A
     -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_INJECT_BASE_ENTITLEMENTS=NO \
     -DCMAKE_XCODE_ATTRIBUTE_OTHER_CODE_SIGN_FLAGS="--timestamp" \
     -DMACOS_RELEASE=ON
-cmake --build build --config Release --parallel
+cmake --build build --config Release --parallel 4 | xcpretty
 
 # copy builds to bin
 echo "Copying builds..."

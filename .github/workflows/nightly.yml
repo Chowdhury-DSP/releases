@@ -19,6 +19,7 @@ jobs:
       with:
         repository: Chowdhury-DSP/Plugin_SDKs
         path: SDKs
+        token: ${{ OUR_GITHUB_PAT }}
 
     - name: Get latest CMake
       uses: lukka/get-cmake@latest
@@ -52,6 +53,7 @@ jobs:
       with:
         repository: Chowdhury-DSP/Plugin_SDKs
         path: SDKs
+        token: ${{ OUR_GITHUB_PAT }}
 
     - name: Get latest CMake
       uses: lukka/get-cmake@latest

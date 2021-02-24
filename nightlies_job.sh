@@ -22,6 +22,7 @@ do
     metadata="plugins/$plugin/metadata.json"
     repo=$(jq -r '.repo' "$metadata")
     hash=$(jq -r '.hash' "$metadata")
+    default_branch=$(jq -r '.branch' "$metadata")
 
     IFS='/' # set delimiter
     read -ra vals <<< "$repo" # split repo url on '/'
@@ -29,10 +30,7 @@ do
     repo_name=${vals[-1]}
     IFS=' ' # reset delimiter
 
-    repo_info=$(github_get "repos/$repo_owner/$repo_name")
-    default_branch=$(echo "$repo_info" | jq -r '.default_branch')
-
-    last_commit=$(github_get "repos/jatinchowdhury18/KlonCentaur/commits/$default_branch")
+    last_commit=$(github_get "repos/$repo_owner/$repo_name/commits/$default_branch")
     last_commit_hash=$(echo "$last_commit" | jq -r '.sha')
     echo "Latest commit: $last_commit_hash"
 

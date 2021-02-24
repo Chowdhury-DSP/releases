@@ -2,5 +2,6 @@
     "name": "ChowCentaur",
     "repo": "https://github.com/jatinchowdhury18/KlonCentaur",
     "hash": "145ac15145c3cbc729d1321943c9b4f1e09809dc",
-    "tag": "v1.2.0"
+    "tag": "v1.2.0",
+    "branch": "master"
 }

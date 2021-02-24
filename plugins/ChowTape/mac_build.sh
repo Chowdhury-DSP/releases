@@ -63,11 +63,15 @@ mkdir $pkg_dir
 productsign -s "$TEAM_ID" build/CHOWTapeModel.pkg $pkg_dir/CHOWTapeModel-signed.pkg
 
 echo "Notarizing installer package..."
-npx notarize-cli --file $pkg_dir/CHOWTapeModel-signed.pkg --bundle-id com.chowdsp.CHOWTapeModel --username chowdsp@gmail.com --password "$INSTALLER_PASS"
+npx notarize-cli --file $pkg_dir/CHOWTapeModel-signed.pkg \
+    --bundle-id com.chowdsp.CHOWTapeModel \
+    --username chowdsp@gmail.com \
+    --password "$INSTALLER_PASS" \
+    --asc-provider "$TEAM_ID"
 
 echo "Building disk image..."
 vol_name=ChowTapeModel-Mac-$version
 hdiutil create "$vol_name.dmg" -fs HFS+ -srcfolder $pkg_dir -format UDZO -volname "$vol_name"
 
 # copy installer to products
-cp "$vol_name.dmg" ../products/
+cp "$vol_name.dmg" ../../products/

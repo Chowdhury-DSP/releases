@@ -62,7 +62,11 @@ mkdir $pkg_dir
 productsign -s "$TEAM_ID" build/ChowCentaur.pkg $pkg_dir/ChowCentaur-signed.pkg
 
 echo "Notarizing installer package..."
-npx notarize-cli --file $pkg_dir/ChowCentaur-signed.pkg --bundle-id com.chowdsp.ChowCentaur --username chowdsp@gmail.com --password "$INSTALLER_PASS"
+npx notarize-cli --file $pkg_dir/ChowCentaur-signed.pkg \
+    --bundle-id com.chowdsp.ChowCentaur \
+    --username chowdsp@gmail.com \
+    --password "$INSTALLER_PASS" \
+    --asc-provider "$TEAM_ID"
 
 echo "Building disk image..."
 vol_name=ChowCentaur-Mac-$version

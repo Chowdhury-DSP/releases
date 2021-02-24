@@ -58,4 +58,4 @@ echo "Building..."
 iscc $script_file
 
 # copy installer to products
-cp Installers/windows/"ChowTapeModel-Win-$version.exe" ../products/
+cp Installers/windows/"ChowTapeModel-Win-$version.exe" ../../products/

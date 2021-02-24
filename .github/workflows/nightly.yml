@@ -87,7 +87,7 @@ jobs:
       run: sudo installer -pkg /Volumes/Packages\ 1.2.9/Install\ Packages.pkg -target /
 
     - name: Install npm packages
-      run: npm install -g notarize-cli
+      run: npm install -g git+https://github.com/jatinchowdhury18/notarize-cli
 
     - name: Setup temporary keychain and add installer signing certificate
       uses: apple-actions/import-codesign-certs@v1

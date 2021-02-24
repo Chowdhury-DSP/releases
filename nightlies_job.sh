@@ -63,19 +63,21 @@ git push -u https://jatinchowdhury18:$password@github.com/Chowdhury-DSP/releases
 
 sleep 60m
 
-plugins_to_update=("ChowTape")
 password=$(cat ~/ccrma_pass)
 ssh_cmd="sshpass -p $password ssh -q -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu"
 scp_cmd="sshpass -p $password scp -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu:"
 ssh_dir="~/Library/Web/chowdsp/nightly_plugins"
+nightly_dir=~/Web/chowdsp/nightly_plugins
 
 for p in "${plugins_to_update[@]}"; do
+    update=1
     if $ssh_cmd stat $ssh_dir/$p*-Mac* \> /dev/null 2\>\&1
         then
             echo "Nightly update found for $p Mac"
-            rm -f ~/Web/chowdsp/nightly_plugins/$p*-Mac*
-            $scp_cmd$ssh_dir/$p*-Mac* ~/Web/chowdsp/nightly_plugins/
+            rm -f $nightly_dir/$p*-Mac*
+            $scp_cmd$ssh_dir/$p*-Mac* $nightly_dir/
             $ssh_cmd "rm $ssh_dir/$p*-Mac*"
+            update=0
         else
             echo "No Nightly update found for $p Mac"
     fi
@@ -83,11 +85,21 @@ for p in "${plugins_to_update[@]}"; do
     if $ssh_cmd stat $ssh_dir/$p*-Win* \> /dev/null 2\>\&1
         then
             echo "Nightly update found for $p Win"
-            rm -f ~/Web/chowdsp/nightly_plugins/$p*-Win*
-            $scp_cmd$ssh_dir/$p*-Win* ~/Web/chowdsp/nightly_plugins/
+            rm -f $nightly_dir/$p*-Win*
+            $scp_cmd$ssh_dir/$p*-Win* $nightly_dir/
             $ssh_cmd "rm $ssh_dir/$p*-Win*"
+            update=0
         else
             echo "No Nightly update found for $p Win"
+    fi
+
+    if [[ "$update" -eq 0 ]]; then
+        echo "Latest build created on $(date)" > $nightly_dir/${p}_Info.txt
+        win_exe=$(cd $nightly_dir && ls $p*-Win*)
+        mac_dmg=$(cd $nightly_dir && ls $p*-Mac*)
+
+        sed -i -e "s/${p}.*Win.*.exe/$win_exe/g" ~/Web/chowdsp/nightly.js
+        sed -i -e "s/${p}.*Mac.*.dmg/$mac_dmg/g" ~/Web/chowdsp/nightly.js
     fi
 done
 

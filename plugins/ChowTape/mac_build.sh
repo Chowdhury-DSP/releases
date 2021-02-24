@@ -35,10 +35,10 @@ cmake --build build --config Release --parallel 4 | xcpretty
 echo "Copying builds..."
 mkdir -p bin/Mac
 plugin="CHOWTapeModel"
-cp -R "build/${plugin}/${plugin}_artefacts/Release/Standalone/${plugin}.app" "bin/Mac/${plugin}.app"
-cp -R "build/${plugin}/${plugin}_artefacts/Release/VST/${plugin}.vst" "bin/Mac/${plugin}.vst"
-cp -R "build/${plugin}/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Mac/${plugin}.vst3"
-cp -R "build/${plugin}/${plugin}_artefacts/Release/AU/${plugin}.component" "bin/Mac/${plugin}.component"
+cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}.app" "bin/Mac/${plugin}.app"
+cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.vst" "bin/Mac/${plugin}.vst"
+cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Mac/${plugin}.vst3"
+cp -R "build/${plugin}_artefacts/Release/AU/${plugin}.component" "bin/Mac/${plugin}.component"
 
 # create installer
 echo "Creating installer..."

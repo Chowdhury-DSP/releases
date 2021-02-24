@@ -37,13 +37,13 @@ mkdir -p bin/Win64
 mkdir -p bin/Win32
 
 plugin=CHOWTapeModel
-cp -R "build/${plugin}/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win64/${plugin}.exe"
-cp -R "build/${plugin}/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win64/${plugin}.dll"
-cp -R "build/${plugin}/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win64/${plugin}.vst3"
+cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win64/${plugin}.exe"
+cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win64/${plugin}.dll"
+cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win64/${plugin}.vst3"
 
-cp -R "build32/${plugin}/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win32/${plugin}.exe"
-cp -R "build32/${plugin}/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win32/${plugin}.dll"
-cp -R "build32/${plugin}/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win32/${plugin}.vst3"
+cp -R "build32/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win32/${plugin}.exe"
+cp -R "build32/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win32/${plugin}.dll"
+cp -R "build32/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win32/${plugin}.vst3"
 
 # create installer
 echo "Creating installer..."

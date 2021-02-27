@@ -18,10 +18,10 @@ git checkout "$hash"
 git submodule update --init --recursive
 
 # set up SDK paths
-sed -i -e "19s~.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
-sed -i -e "20s~.*~include_directories(${SDK_PATH}/ASIO_SDK/common)~" CMakeLists.txt
-sed -i -e '5s/#//' ChowCentaur/CMakeLists.txt
-sed -i -e '42s/#//' ChowCentaur/CMakeLists.txt
+sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
+sed -i -e "s~.*asiosdk.*~include_directories(${SDK_PATH}/ASIO_SDK/common)~" CMakeLists.txt
+sed -i -e 's/#.*VST/VST/' ChowCentaur/CMakeLists.txt
+sed -i -e 's/# JUCE_ASIO.*/JUCE_ASIO=1/' ChowCentaur/CMakeLists.txt
 
 # build Win64
 cmake -Bbuild -G"Visual Studio 16 2019" -A x64

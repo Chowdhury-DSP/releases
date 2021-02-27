@@ -17,8 +17,8 @@ git checkout "$hash"
 git submodule update --init --recursive
 
 # set up SDK paths
-sed -i -e "19s~.*~juce_set_vst2_sdk_path(${SDK_PATH}/VST2_SDK)~" CMakeLists.txt
-sed -i -e '5s/#//' ChowCentaur/CMakeLists.txt
+sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${SDK_PATH}/VST2_SDK)~" CMakeLists.txt
+sed -i -e 's/#.*VST/VST/' ChowCentaur/CMakeLists.txt
 
 # build Win64
 cmake -Bbuild -GXcode -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY="Developer ID Application" \

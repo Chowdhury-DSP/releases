@@ -19,9 +19,8 @@ git submodule update --init --recursive
 
 # set up SDK paths
 cd Plugin
-sed -i -e "10s~.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
-sed -i -e "11s~.*~include_directories(${SDK_PATH}/ASIO_SDK/common)~" CMakeLists.txt
-sed -i -e '17s/#//' CMakeLists.txt
+sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
+sed -i -e 's/#.*VST/VST/' ChowCentaur/CMakeLists.txt
 
 # build Win64
 cmake -Bbuild -G"Visual Studio 16 2019" -A x64

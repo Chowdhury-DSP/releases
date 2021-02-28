@@ -5,7 +5,6 @@ set -e
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"
 VST_SDK="D:${SDK_PATH:2}/VST2_SDK"
-ASIO_SDK="D:${SDK_PATH:2}/ASIO_SDK/common"
 
 # clone git repo
 name=$(jq -r '.name' "$DIR/metadata.json")
@@ -20,9 +19,7 @@ git submodule update --init --recursive
 
 # set up SDK paths
 sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
-sed -i -e "s~.*ASIO_SDK.*~include_directories(${ASIO_PATH})~" CMakeLists.txt
 sed -i -e 's/#.*VST/VST/' ChowCentaur/CMakeLists.txt
-sed -i -e 's/# JUCE_ASIO.*/JUCE_ASIO=1/' ChowCentaur/CMakeLists.txt
 
 # build Win64
 cmake -Bbuild -G"Visual Studio 16 2019" -A x64

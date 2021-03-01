@@ -62,6 +62,19 @@ jobs:
         username: jatin
         password: ${{ secrets.CCRMA_PASS }}
 
+    - name: Send email notification
+      if: always()
+      uses: dawidd6/action-send-mail@v2
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: chowdsp
+        password: ${{ secrets.GMAIL_PASS }}
+        subject: "ChowDSP ${{ github.job }} completed with status: ${{ job.status }}"
+        body: "ChowDSP ${{ github.job }} has completed.\n\nRunning on commit: ${{ github.event.head_commit.message }}\nStatus: ${{ job.status }}"
+        to: chowdsp@gmail.com
+        from: ChowDSP Nightly Release Pipeline (Windows)
+
   macos_release:
     name: Mac Nightly Release
     if: contains(toJson(github.event.commits), 'Update Nightlies')
@@ -143,3 +156,16 @@ jobs:
         host: ccrma-gate.stanford.edu
         username: jatin
         password: ${{ secrets.CCRMA_PASS }}
+
+    - name: Send email notification
+      if: always()
+      uses: dawidd6/action-send-mail@v2
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: chowdsp
+        password: ${{ secrets.GMAIL_PASS }}
+        subject: "ChowDSP ${{ github.job }} completed with status: ${{ job.status }}"
+        body: "ChowDSP ${{ github.job }} has completed.\n\nRunning on commit: ${{ github.event.head_commit.message }}\nStatus: ${{ job.status }}"
+        to: chowdsp@gmail.com
+        from: ChowDSP Nightly Release Pipeline (MacOS)

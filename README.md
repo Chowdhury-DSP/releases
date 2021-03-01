@@ -14,4 +14,4 @@ The nightly pipeline runs once per night, and performs the following tasks:
 - If new builds are available, the script will download them to a `nightly_plugins`
   directory that can be accessed by the ChowDSP web page.
 
-TODO: make a releases script.
+TODO: make a releases script (update metadata version?).

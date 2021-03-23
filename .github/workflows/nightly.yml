@@ -169,3 +169,70 @@ jobs:
         body: "ChowDSP ${{ github.job }} has completed.\n\nRunning on commit: ${{ github.event.head_commit.message }}\nStatus: ${{ job.status }}"
         to: chowdsp@gmail.com
         from: ChowDSP Nightly Release Pipeline (MacOS)
+
+  linux_release:
+    name: Linux Nightly Release
+    if: contains(toJson(github.event.commits), 'Update Nightlies')
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Install SDKs
+      uses: actions/checkout@v2
+      with:
+        repository: Chowdhury-DSP/Plugins_SDKs
+        path: SDKs
+        token: ${{ secrets.OUR_GITHUB_PAT }}
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Install Linux Deps
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt install libasound2-dev libcurl4-openssl-dev libx11-dev libxinerama-dev libxext-dev libfreetype6-dev libwebkit2gtk-4.0-dev libglu1-mesa-dev
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
+
+    - name: Setup Products directory
+      run: mkdir products
+
+    # - name: Setup debug session
+    #   uses: mxschmitt/action-tmate@v3
+
+    # - name: Build ChowCentaur
+    #   if: contains(toJson(github.event.commits), 'ChowCentaur')
+    #   run: bash plugins/ChowCentaur/win_build.sh
+
+    # - name: Build ChowTape
+    #   if: contains(toJson(github.event.commits), 'ChowTape')
+    #   run: bash plugins/ChowTape/win_build.sh
+
+    - name: Build ChowMatrix
+      if: contains(toJson(github.event.commits), 'ChowMatrix')
+      run: bash plugins/ChowMatrix/linux_build.sh
+
+    - name: Deploy Nightly Builds
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: products
+        remote: Library/Web/chowdsp/nightly_plugins
+        host: ccrma-gate.stanford.edu
+        username: jatin
+        password: ${{ secrets.CCRMA_PASS }}
+
+    - name: Send email notification
+      if: always()
+      uses: dawidd6/action-send-mail@v2
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: chowdsp
+        password: ${{ secrets.GMAIL_PASS }}
+        subject: "ChowDSP ${{ github.job }} completed with status: ${{ job.status }}"
+        body: "ChowDSP ${{ github.job }} has completed.\n\nRunning on commit: ${{ github.event.head_commit.message }}\nStatus: ${{ job.status }}"
+        to: chowdsp@gmail.com
+        from: ChowDSP Nightly Release Pipeline (Linux)

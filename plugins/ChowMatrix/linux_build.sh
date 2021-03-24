@@ -80,7 +80,7 @@ find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
 chmod -R 0755 "${name}/usr/bin/ChowMatrix"
 
 echo "----- LIBRARY CONTENTS -----"
-find "${name}/usr/{bin,lib}" -print
+find ${name}/usr/{bin,lib} -print
 
 # build package
 deb_name=${name}-Linux-x64-${version}

@@ -97,9 +97,11 @@ for p in "${plugins_to_update[@]}"; do
         echo "Latest build created on $(date)" > $nightly_dir/${p}_Info.txt
         win_exe=$(cd $nightly_dir && ls $p*-Win*)
         mac_dmg=$(cd $nightly_dir && ls $p*-Mac*)
+        lin_deb=$(cd $nightly_dir && ls $p*-Linux*)
 
         sed -i -e "s/${p}.*Win.*.exe/$win_exe/g" ~/Web/chowdsp/nightly.js
         sed -i -e "s/${p}.*Mac.*.dmg/$mac_dmg/g" ~/Web/chowdsp/nightly.js
+        # sed -i -e "s/${p}.*Linux.*.deb/$lin_deb/g" ~/Web/chowdsp/nightly.js
     fi
 done
 

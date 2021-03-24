@@ -26,7 +26,8 @@ cmake --build build --config Release --parallel 4
 
 # create installer
 echo "Creating installer..."
-version=$(cut -f 2 -d '=' <<< "$(grep 'CMAKE_PROJECT_version:STATIC' build/CMakeCache.txt)")
+version=$(cut -f 2 -d '=' <<< "$(grep 'CMAKE_PROJECT_VERSION:STATIC' build/CMakeCache.txt)")
+echo "Version: ${version}"
 
 mkdir -p "${name}/usr/lib/vst3"
 # mkdir -p "${name}/usr/lib/vst"

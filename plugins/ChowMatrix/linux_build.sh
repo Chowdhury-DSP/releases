@@ -41,10 +41,10 @@ touch "${name}/DEBIAN/control"
 cat <<EOT >> "${name}/DEBIAN/control"
 Source: ${name}
 Package: ${name}
-version: $version
+Version: $version
 Architecture: amd64
 Maintainer: Chowdhury DSP <chowdsp@gmail.com>
-Depends: libasound2-dev libcurl4-openssl-dev libx11-dev libxinerama-dev libxext-dev libfreetype6-dev libwebkit2gtk-4.0-dev libglu1-mesa-dev
+Depends: libasound2-dev, libcurl4-openssl-dev, libx11-dev, libxinerama-dev, libxext-dev, libfreetype6-dev, libwebkit2gtk-4.0-dev, libglu1-mesa-dev
 Provides: vst-plugin
 Section: sound
 Priority: optional

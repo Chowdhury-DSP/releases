@@ -85,7 +85,7 @@ echo "----- LIBRARY CONTENTS -----"
 find ${name}/usr/{bin,lib} -print
 
 # build package
-deb_name=${name}-Linux-x64-${version}
+deb_name=ChowTapeModel-Linux-x64-${version}
 dpkg-deb --build "${name}" "${deb_name}.deb"
 
 echo "Built DEB Package"

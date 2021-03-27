@@ -67,7 +67,7 @@ EOT
 gzip -9 -n "${name}/usr/share/${name}/doc/changelog.Debian"
 
 # copy license
-cp LICENSE "${name}/usr/share/${name}/doc/copyright"
+cp ../LICENSE "${name}/usr/share/${name}/doc/copyright"
 
 # copy plugins bundles
 # cp -R build/CHOWTapeModel_artefacts/VST/CHOWTapeModel.so "${name}/usr/lib/vst/"

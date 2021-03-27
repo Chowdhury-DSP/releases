@@ -69,10 +69,10 @@ gzip -9 -n "${name}/usr/share/${name}/doc/changelog.Debian"
 cp LICENSE "${name}/usr/share/${name}/doc/copyright"
 
 # copy plugins bundles
-# cp -R build/ChowCentaur_artefacts/VST/ChowCentaur.so "${name}/usr/lib/vst/"
-cp -R build/ChowCentaur_artefacts/VST3/ChowCentaur.vst3 "${name}/usr/lib/vst3/"
-cp -R build/ChowCentaur_artefacts/LV2/ChowCentaur.lv2 "${name}/usr/lib/lv2/"
-cp -R build/ChowCentaur_artefacts/Standalone/ChowCentaur "${name}/usr/bin/"
+# cp -R build/ChowCentaur/ChowCentaur_artefacts/VST/ChowCentaur.so "${name}/usr/lib/vst/"
+cp -R build/ChowCentaur/ChowCentaur_artefacts/VST3/ChowCentaur.vst3 "${name}/usr/lib/vst3/"
+cp -R build/ChowCentaur/ChowCentaur_artefacts/LV2/ChowCentaur.lv2 "${name}/usr/lib/lv2/"
+cp -R build/ChowCentaur/ChowCentaur_artefacts/Standalone/ChowCentaur "${name}/usr/bin/"
 
 # set permissions
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644

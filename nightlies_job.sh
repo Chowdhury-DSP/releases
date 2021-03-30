@@ -93,6 +93,17 @@ for p in "${plugins_to_update[@]}"; do
             echo "No Nightly update found for $p Win"
     fi
 
+    if $ssh_cmd stat $ssh_dir/$p*-Linux* \> /dev/null 2\>\&1
+        then
+            echo "Nightly update found for $p Linux"
+            rm -f $nightly_dir/$p*-Linux*
+            $scp_cmd$ssh_dir/$p*-Linux* $nightly_dir/
+            $ssh_cmd "rm $ssh_dir/$p*-Linux*"
+            update=0
+        else
+            echo "No Nightly update found for $p Linux"
+    fi
+
     if [[ "$update" -eq 0 ]]; then
         echo "Latest build created on $(date)" > $nightly_dir/${p}_Info.txt
         win_exe=$(cd $nightly_dir && ls $p*-Win*)

@@ -19,7 +19,6 @@ git submodule update --init --recursive
 
 # set up SDK paths
 sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
-sed -i -e 's/#.*VST/VST/' CMakeLists.txt
 
 # build Win64
 cmake -Bbuild -G"Visual Studio 16 2019" -A x64

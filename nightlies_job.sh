@@ -57,9 +57,9 @@ do
 done
 
 echo "Pushing git commit to trigger update..."
-password=$(cat ~/git_pass)
+pat=$(cat ~/git_pat)
 git commit -am "$git_commit_msg"
-git push -u https://jatinchowdhury18:$password@github.com/Chowdhury-DSP/releases.git main
+git push -u https://jatinchowdhury18:$pat@github.com/Chowdhury-DSP/releases.git main
 
 sleep 60m
 

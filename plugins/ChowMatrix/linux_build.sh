@@ -48,7 +48,7 @@ Depends: libasound2-dev, libcurl4-openssl-dev, libx11-dev, libxinerama-dev, libx
 Provides: vst-plugin
 Section: sound
 Priority: optional
-Description: Virtual audio effect composed of an growable tree of modular delay lines
+Description: Virtual audio effect composed of an growable tree of modular delay lines.
  ChowMatrix includes VST3, LV2, and Standalone formats.
 EOT
 

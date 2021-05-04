@@ -48,7 +48,7 @@ Depends: libasound2-dev, libcurl4-openssl-dev, libx11-dev, libxinerama-dev, libx
 Provides: vst-plugin
 Section: sound
 Priority: optional
-Description: Virtual audio phaser effect inspired by the Schulte Compact Phasing 'A'
+Description: Virtual audio phaser effect inspired by the Schulte Compact Phasing 'A'.
  ChowPhaser includes VST3 and Standalone formats.
 EOT
 

@@ -45,7 +45,7 @@ Package: ${name}
 Version: $version
 Architecture: amd64
 Maintainer: Chowdhury DSP <chowdsp@gmail.com>
-Depends: libasound2-dev, libcurl4-openssl-dev, libx11-dev, libxinerama-dev, libxext-dev, libfreetype6-dev, libwebkit2gtk-4.0-dev, libglu1-mesa-dev
+Depends: libjack0 | libjack-jackd2-0, libasound2 (>= 1.0.16), libc6 (>= 2.29), libfreetype6 (>= 2.2.1), libgcc-s1 (>= 4.0), libstdc++6 (>= 7)
 Provides: vst-plugin
 Section: sound
 Priority: optional

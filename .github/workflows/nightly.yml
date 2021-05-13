@@ -187,6 +187,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: System Info
+      run: more /etc/os-release
+
     - name: Checkout repo
       uses: actions/checkout@v2
 

@@ -57,6 +57,10 @@ jobs:
       if: contains(toJson(github.event.commits), 'ChowPhaser')
       run: bash plugins/ChowPhaser/win_build.sh
 
+    - name: Build ChowKick
+      if: contains(toJson(github.event.commits), 'ChowKick')
+      run: bash plugins/ChowKick/win_build.sh
+
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -159,6 +163,13 @@ jobs:
         TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
 
+    - name: Build ChowKick
+      if: contains(toJson(github.event.commits), 'ChowKick')
+      run: bash plugins/ChowKick/mac_build.sh
+      env:
+        TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
+
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -232,6 +243,10 @@ jobs:
     - name: Build ChowPhaser
       if: contains(toJson(github.event.commits), 'ChowPhaser')
       run: bash plugins/ChowPhaser/linux_build.sh
+
+    - name: Build ChowKick
+      if: contains(toJson(github.event.commits), 'ChowKick')
+      run: bash plugins/ChowKick/linux_build.sh
 
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release

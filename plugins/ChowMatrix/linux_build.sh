@@ -69,10 +69,10 @@ gzip -9 -n "${name}/usr/share/${name}/doc/changelog.Debian"
 cp LICENSE "${name}/usr/share/${name}/doc/copyright"
 
 # copy plugins bundles
-# cp -R build/ChowMatrix_artefacts/VST/ChowMatrix.so "${name}/usr/lib/vst/"
-cp -R build/ChowMatrix_artefacts/VST3/ChowMatrix.vst3 "${name}/usr/lib/vst3/"
-cp -R build/ChowMatrix_artefacts/LV2/ChowMatrix.lv2 "${name}/usr/lib/lv2/"
-cp -R build/ChowMatrix_artefacts/Standalone/ChowMatrix "${name}/usr/bin/"
+# cp -R build/ChowMatrix_artefacts/Release/VST/ChowMatrix.so "${name}/usr/lib/vst/"
+cp -R build/ChowMatrix_artefacts/Release/VST3/ChowMatrix.vst3 "${name}/usr/lib/vst3/"
+cp -R build/ChowMatrix_artefacts/Release/LV2/ChowMatrix.lv2 "${name}/usr/lib/lv2/"
+cp -R build/ChowMatrix_artefacts/Release/Standalone/ChowMatrix "${name}/usr/bin/"
 
 # set permissions
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644

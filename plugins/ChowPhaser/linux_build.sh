@@ -71,10 +71,10 @@ cp LICENSE "${name}/usr/share/${name}/doc/copyright"
 # copy plugins bundles
 declare -a plugins=("ChowPhaserMono" "ChowPhaserStereo")
 for plugin in "${plugins[@]}"; do
-    cp -R "build/${plugin}_artefacts/Standalone/${plugin}" "${name}/usr/bin/"
-    cp -R "build/${plugin}_artefacts/VST3/${plugin}.vst3" "${name}/usr/lib/vst3/"
-    # cp -R "build/${plugin}_artefacts/LV2/${plugin}.lv2" "${name}/usr/lib/lv2/"
-    # cp -R "build/${plugin}_artefacts/VST/${plugin}.dll" "bin/Win64/${plugin}.dll"
+    cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}" "${name}/usr/bin/"
+    cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "${name}/usr/lib/vst3/"
+    # cp -R "build/${plugin}_artefacts/Release/LV2/${plugin}.lv2" "${name}/usr/lib/lv2/"
+    # cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win64/${plugin}.dll"
 done
 
 # set permissions

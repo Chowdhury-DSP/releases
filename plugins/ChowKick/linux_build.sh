@@ -69,10 +69,10 @@ gzip -9 -n "${name}/usr/share/${name}/doc/changelog.Debian"
 cp LICENSE "${name}/usr/share/${name}/doc/copyright"
 
 # copy plugins bundles
-# cp -R build/ChowKick_artefacts/VST/ChowKick.so "${name}/usr/lib/vst/"
-cp -R build/ChowKick_artefacts/VST3/ChowKick.vst3 "${name}/usr/lib/vst3/"
-cp -R build/ChowKick_artefacts/LV2/ChowKick.lv2 "${name}/usr/lib/lv2/"
-cp -R build/ChowKick_artefacts/Standalone/ChowKick "${name}/usr/bin/"
+# cp -R build/ChowKick_artefacts/Release/VST/ChowKick.so "${name}/usr/lib/vst/"
+cp -R build/ChowKick_artefacts/Release/VST3/ChowKick.vst3 "${name}/usr/lib/vst3/"
+cp -R build/ChowKick_artefacts/Release/LV2/ChowKick.lv2 "${name}/usr/lib/lv2/"
+cp -R build/ChowKick_artefacts/Release/Standalone/ChowKick "${name}/usr/bin/"
 
 # set permissions
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644

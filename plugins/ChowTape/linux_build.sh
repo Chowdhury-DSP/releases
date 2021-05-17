@@ -70,10 +70,10 @@ gzip -9 -n "${name}/usr/share/${name}/doc/changelog.Debian"
 cp ../LICENSE "${name}/usr/share/${name}/doc/copyright"
 
 # copy plugins bundles
-# cp -R build/CHOWTapeModel_artefacts/VST/CHOWTapeModel.so "${name}/usr/lib/vst/"
-cp -R build/CHOWTapeModel_artefacts/VST3/CHOWTapeModel.vst3 "${name}/usr/lib/vst3/"
-cp -R build/CHOWTapeModel_artefacts/LV2/CHOWTapeModel.lv2 "${name}/usr/lib/lv2/"
-cp -R build/CHOWTapeModel_artefacts/Standalone/CHOWTapeModel "${name}/usr/bin/"
+# cp -R build/CHOWTapeModel_artefacts/Release/VST/CHOWTapeModel.so "${name}/usr/lib/vst/"
+cp -R build/CHOWTapeModel_artefacts/Release/VST3/CHOWTapeModel.vst3 "${name}/usr/lib/vst3/"
+cp -R build/CHOWTapeModel_artefacts/Release/LV2/CHOWTapeModel.lv2 "${name}/usr/lib/lv2/"
+cp -R build/CHOWTapeModel_artefacts/Release/Standalone/CHOWTapeModel "${name}/usr/bin/"
 
 # set permissions
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644

@@ -22,7 +22,7 @@ cd Plugin
 # sed -i -e '16s/#//' CMakeLists.txt
 
 # build Win64
-cmake -Bbuild
+cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release --parallel 4
 
 # create installer

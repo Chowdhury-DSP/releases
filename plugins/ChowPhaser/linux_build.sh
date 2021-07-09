@@ -18,7 +18,6 @@ git submodule update --init --recursive
 
 # set up SDK paths
 # sed -i -e "9s~.*~juce_set_vst2_sdk_path(${SDK_PATH}/VST2_SDK)~" CMakeLists.txt
-# sed -i -e '16s/#//' CMakeLists.txt
 
 # build Win64
 cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
@@ -31,7 +30,7 @@ echo "Version: ${version}"
 
 mkdir -p "${name}/usr/lib/vst3"
 # mkdir -p "${name}/usr/lib/vst"
-# mkdir -p "${name}/usr/lib/lv2"
+mkdir -p "${name}/usr/lib/lv2"
 mkdir -p "${name}/usr/bin"
 mkdir -p "${name}/usr/share/${name}/doc"
 mkdir -p "${name}/DEBIAN"
@@ -73,13 +72,13 @@ declare -a plugins=("ChowPhaserMono" "ChowPhaserStereo")
 for plugin in "${plugins[@]}"; do
     cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}" "${name}/usr/bin/"
     cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "${name}/usr/lib/vst3/"
-    # cp -R "build/${plugin}_artefacts/Release/LV2/${plugin}.lv2" "${name}/usr/lib/lv2/"
+    cp -R "build/${plugin}_artefacts/Release/LV2/${plugin}.lv2" "${name}/usr/lib/lv2/"
     # cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win64/${plugin}.dll"
 done
 
 # set permissions
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644
-# find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
+find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/vst3/" -type f -iname "*.so" | xargs chmod 0644
 chmod -R 0755 "${name}/usr/bin/ChowPhaserMono"
 chmod -R 0755 "${name}/usr/bin/ChowPhaserStereo"

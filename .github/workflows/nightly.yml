@@ -256,8 +256,8 @@ jobs:
       if: contains(toJson(github.event.commits), 'ChowKick')
       run: bash plugins/ChowKick/linux_build.sh
 
-    - name: Setup debug session
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup debug session
+    # uses: mxschmitt/action-tmate@v3
 
     - name: Build BYOD
       if: contains(toJson(github.event.commits), 'BYOD')

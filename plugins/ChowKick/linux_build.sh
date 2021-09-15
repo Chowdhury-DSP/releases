@@ -65,8 +65,8 @@ ${name} (${version}) stable; urgency=medium
 EOT
 gzip -9 -n "${name}/usr/share/${name}/doc/changelog.Debian"
 
-# copy license
 cp LICENSE "${name}/usr/share/${name}/doc/copyright"
+cp -R res/tuning_library "${name}/usr/share/${name}/"
 
 # copy plugins bundles
 # cp -R build/ChowKick_artefacts/Release/VST/ChowKick.so "${name}/usr/lib/vst/"

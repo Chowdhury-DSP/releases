@@ -61,7 +61,7 @@ pat=$(cat ~/git_pat)
 git commit -am "$git_commit_msg"
 git push -u https://jatinchowdhury18:$pat@github.com/Chowdhury-DSP/releases.git main
 
-sleep 120m
+sleep 50m
 
 password=$(cat ~/ccrma_pass)
 ssh_cmd="sshpass -p $password ssh -q -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu"

@@ -2,6 +2,8 @@
 
 GitHub Actions pipeline for releasing ChowDSP plugins.
 
+Nightly Builds are published on [our website](https://chowdsp.com/nightly.html).
+
 ## Nightly Pipeline
 
 The nightly pipeline runs once per night, and performs the following tasks:

@@ -206,7 +206,7 @@ jobs:
   linux_release:
     name: Linux Nightly Release
     if: contains(toJson(github.event.commits), 'Update Nightlies')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
     - name: System Info

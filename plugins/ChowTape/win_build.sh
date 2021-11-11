@@ -38,6 +38,7 @@ plugin=CHOWTapeModel
 cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win64/${plugin}.exe"
 cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win64/${plugin}.dll"
 cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win64/${plugin}.vst3"
+sshpass -p '$CCRMA_PASS' scp -r jatin@ccrma-gate.stanford.edu:~/aax_builds/Win64/${plugin}.aaxplugin "bin/Win64/${plugin}.aaxplugin"
 
 cp -R "build32/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win32/${plugin}.exe"
 cp -R "build32/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win32/${plugin}.dll"

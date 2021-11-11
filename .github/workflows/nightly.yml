@@ -48,6 +48,8 @@ jobs:
     - name: Build ChowTape
       if: contains(toJson(github.event.commits), 'ChowTape')
       run: bash plugins/ChowTape/win_build.sh
+      env:
+        CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
 
     - name: Build ChowMatrix
       if: contains(toJson(github.event.commits), 'ChowMatrix')
@@ -152,6 +154,7 @@ jobs:
       env:
         TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
+        CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
 
     - name: Build ChowMatrix
       if: contains(toJson(github.event.commits), 'ChowMatrix')

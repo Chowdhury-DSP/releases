@@ -38,6 +38,7 @@ cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}.app" "bin/Mac/${pl
 cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.vst" "bin/Mac/${plugin}.vst"
 cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Mac/${plugin}.vst3"
 cp -R "build/${plugin}_artefacts/Release/AU/${plugin}.component" "bin/Mac/${plugin}.component"
+sshpass -p '$CCRMA_PASS' scp -r jatin@ccrma-gate.stanford.edu:~/aax_builds/Mac/${plugin}.aaxplugin "bin/Mac/${plugin}.aaxplugin"
 
 # create installer
 echo "Creating installer..."

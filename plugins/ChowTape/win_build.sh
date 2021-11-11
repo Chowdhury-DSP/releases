@@ -2,8 +2,6 @@
 
 set -e
 
-echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Win64/CHOWTapeModel.aaxplugin "CHOWTapeModel.aaxplugin"
-
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"
 VST_SDK="D:${SDK_PATH:2}/VST2_SDK"
@@ -40,7 +38,7 @@ plugin=CHOWTapeModel
 cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win64/${plugin}.exe"
 cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win64/${plugin}.dll"
 cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win64/${plugin}.vst3"
-# sshpass -p '$CCRMA_PASS' scp -r jatin@ccrma-gate.stanford.edu:~/aax_builds/Win64/${plugin}.aaxplugin "bin/Win64/${plugin}.aaxplugin"
+echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Win64/${plugin}.aaxplugin "bin/Win64/${plugin}.aaxplugin"
 
 cp -R "build32/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win32/${plugin}.exe"
 cp -R "build32/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win32/${plugin}.dll"

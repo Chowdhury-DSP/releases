@@ -123,8 +123,8 @@ jobs:
     - name: Install npm packages
       run: npm install -g git+https://github.com/jatinchowdhury18/notarize-cli
 
-    - name: Install sshpass
-      run: brew install esolitos/ipa/sshpass
+    - name: Install putty
+      run: brew install putty
 
     - name: Setup temporary keychain and add installer signing certificate
       uses: apple-actions/import-codesign-certs@v1

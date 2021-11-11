@@ -2,7 +2,7 @@
 
 set -e
 
-sshpass -p '$CCRMA_PASS' scp -r jatin@ccrma-gate.stanford.edu:~/aax_builds/Mac/${plugin}.aaxplugin "${plugin}.aaxplugin"
+echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:~/aax_builds/Mac/${plugin}.aaxplugin "${plugin}.aaxplugin"
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"

@@ -27,6 +27,9 @@ jobs:
     - name: Get latest CMake
       uses: lukka/get-cmake@latest
 
+    - name: Install PuTTy
+      run: choco install putty
+
     - name: Setup NuGet.exe
       uses: nuget/setup-nuget@v1
       with:
@@ -119,6 +122,9 @@ jobs:
 
     - name: Install npm packages
       run: npm install -g git+https://github.com/jatinchowdhury18/notarize-cli
+
+    - name: Install sshpass
+      run: brew install esolitos/ipa/sshpass
 
     - name: Setup temporary keychain and add installer signing certificate
       uses: apple-actions/import-codesign-certs@v1

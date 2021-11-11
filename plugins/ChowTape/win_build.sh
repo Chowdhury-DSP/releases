@@ -2,7 +2,7 @@
 
 set -e
 
-echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Win64/${plugin}.aaxplugin "${plugin}.aaxplugin"
+echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Win64/CHOWTapeModel.aaxplugin "CHOWTapeModel.aaxplugin"
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"

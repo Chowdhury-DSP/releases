@@ -22,11 +22,11 @@ git submodule update --init --recursive
 sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
 
 # build Win64
-cmake -Bbuild -G"Visual Studio 16 2019" -A x64 -DASIOSDK_DIR="${ASIO_SDK}"
+cmake -Bbuild -G"Visual Studio 16 2019" -A x64 -DBUILD_RELEASE=ON -DASIOSDK_DIR="${ASIO_SDK}"
 cmake --build build --config Release --parallel 4
 
 # build Win32
-cmake -Bbuild32 -G"Visual Studio 16 2019" -A Win32 -DASIOSDK_DIR="${ASIO_SDK}"
+cmake -Bbuild32 -G"Visual Studio 16 2019" -A Win32 -DBUILD_RELEASE=ON -DASIOSDK_DIR="${ASIO_SDK}"
 cmake --build build32 --config Release --parallel 4
 
 # copy builds to bin

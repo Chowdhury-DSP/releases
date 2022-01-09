@@ -27,10 +27,10 @@ jobs:
     - name: Get latest CMake
       uses: lukka/get-cmake@latest
 
-    - name: Choco Install PuTTy
-      uses: crazy-max/ghaction-chocolatey@v1
-      with:
-        args: install putty
+    # - name: Choco Install PuTTy
+    #   uses: crazy-max/ghaction-chocolatey@v1
+    #   with:
+    #     args: install putty
 
     - name: Choco Install Inno Setup
       uses: crazy-max/ghaction-chocolatey@v1

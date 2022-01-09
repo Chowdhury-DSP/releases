@@ -27,16 +27,15 @@ jobs:
     - name: Get latest CMake
       uses: lukka/get-cmake@latest
 
-    - name: Install PuTTy
-      run: choco install putty
-
-    - name: Setup NuGet.exe
-      uses: nuget/setup-nuget@v1
+    - name: Choco Install PuTTy
+      uses: crazy-max/ghaction-chocolatey@v1
       with:
-        nuget-version: latest
+        args: install putty
 
-    - name: Install Inno Setup
-      run: nuget install innosetup
+    - name: Choco Install Inno Setup
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install innosetup
 
     - name: Setup Products directory
       run: mkdir products

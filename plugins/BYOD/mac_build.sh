@@ -6,5 +6,9 @@ set -e
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $SCRIPT_DIR
 
+# Update submodules
 git submodule update --init --recursive -- BYOD
-bash BYOD/scripts/mac_builds.sh
+
+# run build script
+cd BYOD
+bash scripts/mac_builds.sh

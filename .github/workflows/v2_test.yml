@@ -40,7 +40,6 @@ jobs:
       run: mkdir products
 
     - name: Build BYOD
-      if: contains(toJson(github.event.commits), 'BYOD')
       run: bash plugins/BYOD/win_build.sh
 
   macos_release:

@@ -1,0 +1,136 @@
+name: Nightly V2
+
+on:
+  push:
+    branches:
+    - v2
+
+  workflow_dispatch:
+
+jobs:
+  windows_release:
+    name: Windows Nightly Release
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Install SDKs
+      uses: actions/checkout@v2
+      with:
+        repository: Chowdhury-DSP/Plugins_SDKs
+        path: SDKs
+        token: ${{ secrets.OUR_GITHUB_PAT }}
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Choco Install PuTTy
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install putty.portable
+
+    - name: Choco Install Inno Setup
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install innosetup
+
+    - name: Setup Products directory
+      run: mkdir products
+
+    - name: Build BYOD
+      if: contains(toJson(github.event.commits), 'BYOD')
+      run: bash plugins/BYOD/win_build.sh
+
+  macos_release:
+    name: Mac Nightly Release
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Install SDKs
+      uses: actions/checkout@v2
+      with:
+        repository: Chowdhury-DSP/Plugins_SDKs
+        path: SDKs
+        token: ${{ secrets.OUR_GITHUB_PAT }}
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Download Packages installer build tool
+      run: wget http://s.sudre.free.fr/Software/files/Packages.dmg
+
+    - name: Mount Packages image
+      run: hdiutil attach Packages.dmg
+
+    - name: Install Packages
+      run: sudo installer -pkg /Volumes/Packages\ 1.2.9/Install\ Packages.pkg -target /
+
+    - name: Install npm packages
+      run: npm install -g git+https://github.com/jatinchowdhury18/notarize-cli
+
+    - name: Install putty
+      run: brew install putty
+
+    - name: Setup temporary keychain and add installer signing certificate
+      uses: apple-actions/import-codesign-certs@v1
+      with:
+        keychain-password: ${{ secrets.MAC_CERTIFICATES_PASS }}
+        p12-file-base64: ${{ secrets.MAC_CERTIFICATES_BASE64 }}
+        p12-password: ${{ secrets.MAC_CERTIFICATES_PASS }}
+
+    - name: Setup temporary keychain and add installer signing certificate
+      uses: apple-actions/import-codesign-certs@v1
+      with:
+        keychain-password: ${{ secrets.MAC_CERTIFICATES_PASS }}
+        p12-file-base64: ${{ secrets.MAC_INSTALLER_CERTIFICATES_BASE64 }}
+        p12-password: ${{ secrets.MAC_CERTIFICATES_PASS }}
+        create-keychain: 'false'
+
+    - name: Setup Products directory
+      run: mkdir products
+
+    - name: Build BYOD
+      run: bash plugins/BYOD/mac_build.sh
+      env:
+        TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
+
+  linux_release:
+    name: Linux Nightly Release
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: System Info
+      run: more /etc/os-release
+
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Install SDKs
+      uses: actions/checkout@v2
+      with:
+        repository: Chowdhury-DSP/Plugins_SDKs
+        path: SDKs
+        token: ${{ secrets.OUR_GITHUB_PAT }}
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Install Linux Deps
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt install libasound2-dev libcurl4-openssl-dev libx11-dev libxinerama-dev libxext-dev libfreetype6-dev libwebkit2gtk-4.0-dev libglu1-mesa-dev libjack-jackd2-dev lv2-dev
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
+
+    - name: Setup Products directory
+      run: mkdir products
+
+    - name: Build BYOD
+      run: bash plugins/BYOD/linux_build.sh

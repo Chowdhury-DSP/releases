@@ -1,3 +1,6 @@
 [submodule "plugins/BYOD/BYOD"]
 	path = plugins/BYOD/BYOD
 	url = https://github.com/Chowdhury-DSP/BYOD
+[submodule "plugins/ChowKick/ChowKick"]
+	path = plugins/ChowKick/ChowKick
+	url = https://github.com/Chowdhury-DSP/ChowKick

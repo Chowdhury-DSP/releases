@@ -1,0 +1,18 @@
+[submodule "plugins/BYOD/BYOD"]
+	path = plugins/BYOD/BYOD
+	url = https://github.com/Chowdhury-DSP/BYOD
+[submodule "plugins/ChowCentaur/KlonCentaur"]
+	path = plugins/ChowCentaur/KlonCentaur
+	url = https://github.com/jatinchowdhury18/KlonCentaur
+[submodule "plugins/ChowKick/ChowKick"]
+	path = plugins/ChowKick/ChowKick
+	url = https://github.com/Chowdhury-DSP/ChowKick
+[submodule "plugins/ChowMatrix/ChowMatrix"]
+	path = plugins/ChowMatrix/ChowMatrix
+	url = https://github.com/Chowdhury-DSP/ChowMatrix
+[submodule "plugins/ChowPhaser/ChowPhaser"]
+	path = plugins/ChowPhaser/ChowPhaser
+	url = https://github.com/jatinchowdhury18/ChowPhaser
+[submodule "plugins/ChowTape/AnalogTapeModel"]
+	path = plugins/ChowTape/AnalogTapeModel
+	url = https://github.com/jatinchowdhury18/AnalogTapeModel

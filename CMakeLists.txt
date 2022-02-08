@@ -6,7 +6,7 @@ include(ExternalProject)
 option(BUILD_CHOWTAPE "Build the ChowTape plugin" ON)
 if(BUILD_CHOWTAPE)
     message(STATUS "Configuring build for ChowTape")
-    set(CHOWTAPE_DIR "${CMAKE_SOURCE_DIR}/AnalogTapeModel/Plugin")
+    set(CHOWTAPE_DIR "${CMAKE_SOURCE_DIR}/plugins/ChowTape/AnalogTapeModel/Plugin")
     ExternalProject_Add(ChowTape_Package
         SOURCE_DIR "${CHOWTAPE_DIR}"
         CMAKE_ARGS "-DBUILD_RELEASE=ON -DCMAKE_BUILD_TYPE=Release"
@@ -20,7 +20,7 @@ endif()
 option(BUILD_CHOWMATRIX "Build the ChowMatrix plugin" ON)
 if(BUILD_CHOWMATRIX)
     message(STATUS "Configuring build for ChowMatrix")
-    set(CHOWMATRIX_DIR "${CMAKE_SOURCE_DIR}/ChowMatrix")
+    set(CHOWMATRIX_DIR "${CMAKE_SOURCE_DIR}/plugins/ChowMatrix/ChowMatrix")
     ExternalProject_Add(ChowMatrix_Package
         SOURCE_DIR "${CHOWMATRIX_DIR}"
         CMAKE_ARGS "-DBUILD_RELEASE=ON -DCMAKE_BUILD_TYPE=Release"
@@ -34,7 +34,7 @@ endif()
 option(BUILD_CHOWCENTAUR "Build the KlonCentaur plugin" ON)
 if(BUILD_CHOWCENTAUR)
     message(STATUS "Configuring build for KlonCentaur")
-    set(CHOWCENTAUR_DIR "${CMAKE_SOURCE_DIR}/KlonCentaur")
+    set(CHOWCENTAUR_DIR "${CMAKE_SOURCE_DIR}/plugins/ChowCentaur/KlonCentaur")
     ExternalProject_Add(KlonCentaur_Package
         SOURCE_DIR "${CHOWCENTAUR_DIR}"
         CMAKE_ARGS "-DBUILD_RELEASE=ON -DCMAKE_BUILD_TYPE=Release"
@@ -48,7 +48,7 @@ endif()
 option(BUILD_CHOWKICK "Build the ChowKick plugin" ON)
 if(BUILD_CHOWKICK)
     message(STATUS "Configuring build for ChowKick")
-    set(CHOWKICK_DIR "${CMAKE_SOURCE_DIR}/ChowKick")
+    set(CHOWKICK_DIR "${CMAKE_SOURCE_DIR}/plugins/ChowKick/ChowKick")
     ExternalProject_Add(ChowKick_Package
         SOURCE_DIR "${CHOWKICK_DIR}"
         CMAKE_ARGS "-DBUILD_RELEASE=ON -DCMAKE_BUILD_TYPE=Release"
@@ -62,7 +62,7 @@ endif()
 option(BUILD_BYOD "Build the BYOD plugin" OFF)
 if(BUILD_BYOD)
     message(STATUS "Configuring build for BYOD")
-    set(BYOD_DIR "${CMAKE_SOURCE_DIR}/BYOD")
+    set(BYOD_DIR "${CMAKE_SOURCE_DIR}/plugins/BYOD/BYOD")
     ExternalProject_Add(BYOD_Package
         SOURCE_DIR "${BYOD_DIR}"
         CMAKE_ARGS "-DBUILD_RELEASE=ON -DCMAKE_BUILD_TYPE=Release"

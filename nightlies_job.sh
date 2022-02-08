@@ -11,6 +11,16 @@ github_get() {
   echo "$body"
 }
 
+update_submodule() {
+    local plugin="$1"
+    local commit="$2"
+    cd "plugins/$plugin"
+    cd */
+    git fetch origin
+    git checkout "$commit"
+    cd ../../../
+}
+
 declare -a plugins_to_update=()
 update_needed=1
 for plugin in plugins/*/
@@ -30,22 +40,23 @@ do
     repo_name=${vals[-1]}
     IFS=' ' # reset delimiter
 
-    last_commit=$(github_get "repos/$repo_owner/$repo_name/commits/$default_branch")
-    last_commit_hash=$(echo "$last_commit" | jq -r '.sha')
-    echo "Latest commit: $last_commit_hash"
+    latest_commit=$(github_get "repos/$repo_owner/$repo_name/commits/$default_branch")
+    latest_commit_hash=$(echo "$latest_commit" | jq -r '.sha')
+    echo "Latest commit: $latest_commit_hash"
 
-    if [ -z "${last_commit_hash}" ]; then
+    if [ -z "${latest_commit_hash}" ]; then
         echo "Unable to find last commit hash"
 	continue
     fi
 
-    if [[ "$hash" == "$last_commit_hash" ]]; then
+    if [[ "$hash" == "$latest_commit_hash" ]]; then
         echo "$plugin is up to date!"
         continue
     fi
 
     echo "$plugin requires nightly update!"
-    sed -i "s/$hash/$last_commit_hash/g" "$metadata"
+    sed -i "s/$hash/$latest_commit_hash/g" "$metadata"
+    update_submodule $plugin $latest_commit_hash
     plugins_to_update+=($plugin)
     update_needed=0
 done

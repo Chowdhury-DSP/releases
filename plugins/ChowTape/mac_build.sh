@@ -38,6 +38,7 @@ cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}.app" "bin/Mac/${pl
 cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.vst" "bin/Mac/${plugin}.vst"
 cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Mac/${plugin}.vst3"
 cp -R "build/${plugin}_artefacts/Release/AU/${plugin}.component" "bin/Mac/${plugin}.component"
+cp -R "build/${plugin}_artefacts/Release/CLAP/${plugin}.clap" "bin/Mac/${plugin}.clap"
 echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Mac/${plugin}.aaxplugin "bin/Mac/${plugin}.aaxplugin"
 
 # create installer

@@ -33,6 +33,7 @@ echo "Version: ${version}"
 mkdir -p "${name}/usr/lib/vst3"
 # mkdir -p "${name}/usr/lib/vst"
 mkdir -p "${name}/usr/lib/lv2"
+mkdir -p "${name}/usr/lib/clap"
 mkdir -p "${name}/usr/bin"
 mkdir -p "${name}/usr/share/${name}/doc"
 mkdir -p "${name}/DEBIAN"
@@ -50,7 +51,7 @@ Provides: vst-plugin
 Section: sound
 Priority: optional
 Description: Virtual audio effect using physical modelling to emulate the sound of analog reel-to-reel tape machines.
- ChowTapeModel includes VST3, LV2, and Standalone formats.
+ ChowTapeModel includes VST3, CLAP, LV2, and Standalone formats.
 EOT
 
 touch "${name}/usr/share/${name}/doc/changelog.Debian"
@@ -73,12 +74,14 @@ cp ../LICENSE "${name}/usr/share/${name}/doc/copyright"
 # cp -R build/CHOWTapeModel_artefacts/Release/VST/CHOWTapeModel.so "${name}/usr/lib/vst/"
 cp -R build/CHOWTapeModel_artefacts/Release/VST3/CHOWTapeModel.vst3 "${name}/usr/lib/vst3/"
 cp -R build/CHOWTapeModel_artefacts/Release/LV2/CHOWTapeModel.lv2 "${name}/usr/lib/lv2/"
+cp -R build/CHOWTapeModel_artefacts/Release/CLAP/CHOWTapeModel.clap "${name}/usr/lib/clap/"
 cp -R build/CHOWTapeModel_artefacts/Release/Standalone/CHOWTapeModel "${name}/usr/bin/"
 
 # set permissions
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/vst3/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
+find "${name}/usr/lib/clap/" -type f -iname "*.so" | xargs chmod 0644
 chmod -R 0755 "${name}/usr/bin/CHOWTapeModel"
 
 echo "----- LIBRARY CONTENTS -----"

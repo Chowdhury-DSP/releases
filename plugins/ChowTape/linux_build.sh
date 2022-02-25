@@ -78,10 +78,9 @@ cp -R build/CHOWTapeModel_artefacts/Release/CLAP/CHOWTapeModel.clap "${name}/usr
 cp -R build/CHOWTapeModel_artefacts/Release/Standalone/CHOWTapeModel "${name}/usr/bin/"
 
 # set permissions
-# find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644
-find "${name}/usr/lib/vst3/" -type f -iname "*.so" | xargs chmod 0644
-find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
-find "${name}/usr/lib/clap/" -type f -iname "*.so" | xargs chmod 0644
+find ${name}/usr/lib/vst3/ -type f -iname "*.so" -exec chmod 0644 {} +
+find ${name}/usr/lib/lv2/ -type f -iname "*.so" -exec chmod 0644 {} +
+find ${name}/usr/lib/clap/ -type f -iname "*.so" -exec chmod 0644 {} +
 chmod -R 0755 "${name}/usr/bin/CHOWTapeModel"
 
 echo "----- LIBRARY CONTENTS -----"

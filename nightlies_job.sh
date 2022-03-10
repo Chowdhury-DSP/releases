@@ -83,7 +83,7 @@ password=$(cat ~/ccrma_pass)
 ssh_cmd="sshpass -p $password ssh -q -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu"
 scp_cmd="sshpass -p $password scp -o StrictHostKeyChecking=no jatin@ccrma-gate.stanford.edu:"
 ssh_dir="~/Library/Web/chowdsp/nightly_plugins"
-nightly_dir=~/Web/chowdsp/nightly_plugins
+nightly_dir=~/web/chowdspweb/nightly_plugins
 
 for p in "${plugins_to_update[@]}"; do
     update=1
@@ -126,9 +126,9 @@ for p in "${plugins_to_update[@]}"; do
         mac_dmg=$(cd $nightly_dir && ls $p*-Mac*)
         lin_deb=$(cd $nightly_dir && ls $p*-Linux*)
 
-        sed -i -e "s/${p}.*Win.*.exe/$win_exe/g" ~/Web/chowdsp/nightly.js
-        sed -i -e "s/${p}.*Mac.*.dmg/$mac_dmg/g" ~/Web/chowdsp/nightly.js
-        sed -i -e "s/${p}.*Linux.*.deb/$lin_deb/g" ~/Web/chowdsp/nightly.js
+        sed -i -e "s/${p}.*Win.*.exe/$win_exe/g" ~/web/chowdspweb/nightly.js
+        sed -i -e "s/${p}.*Mac.*.dmg/$mac_dmg/g" ~/web/chowdspweb/nightly.js
+        sed -i -e "s/${p}.*Linux.*.deb/$lin_deb/g" ~/web/chowdspweb/nightly.js
     fi
 done
 

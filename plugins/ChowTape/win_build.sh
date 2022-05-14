@@ -46,17 +46,22 @@ cp -R "build32/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win32/${plugi
 cp -R "build32/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win32/${plugin}.vst3"
 cp -R "build32/${plugin}_artefacts/Release/CLAP/${plugin}.clap" "bin/Win32/${plugin}.clap"
 
-# create installer
-echo "Creating installer..."
-script_file=Installers/windows/ChowTapeModel_Install_Script.iss
-
+# extract version for installer
 version=$(cut -f 2 -d '=' <<< "$(grep 'CMAKE_PROJECT_VERSION:STATIC' build/CMakeCache.txt)")
 echo "Setting app version: $version..."
-sed -i "s/##APPVERSION##/${version}/g" $script_file
 
-# build installer
-echo "Building..."
+# create installer
+echo "Creating 64-bit installer..."
+script_file=Installers/windows/ChowTapeModel_Install_Script.iss
+sed -i "s/##APPVERSION##/${version}/g" $script_file
+iscc $script_file
+
+# create installer (32-bit)
+echo "Creating 32-bit installer..."
+script_file=Installers/windows/ChowTapeModel_Install_Script_32bit.iss
+sed -i "s/##APPVERSION##/${version}/g" $script_file
 iscc $script_file
 
 # copy installer to products
-cp Installers/windows/"ChowTapeModel-Win-$version.exe" ../../products/
+cp Installers/windows/"ChowTapeModel-Win-$version.exe" ../../products/"ChowTapeModel-Win-64bit-$version.exe" 
+cp Installers/windows/"ChowTapeModel-Win-32bit-$version.exe" ../../products/"ChowTapeModel-Win-32bit-$version.exe"

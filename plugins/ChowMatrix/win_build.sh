@@ -43,17 +43,22 @@ cp -R "build32/${name}_artefacts/Release/Standalone/${name}.exe" "bin/Win32/${na
 cp -R "build32/${name}_artefacts/Release/VST/${name}.dll" "bin/Win32/${name}.dll"
 cp -R "build32/${name}_artefacts/Release/VST3/${name}.vst3" "bin/Win32/${name}.vst3"
 
-# create installer
-echo "Creating installer..."
-script_file=installers/windows/ChowMatrix_Install_Script.iss
-
+# extract version for installer
 version=$(cut -f 2 -d '=' <<< "$(grep 'CMAKE_PROJECT_VERSION:STATIC' build/CMakeCache.txt)")
 echo "Setting app version: $version..."
-sed -i "s/##APPVERSION##/${version}/g" $script_file
 
-# build installer
-echo "Building..."
+# create installer
+echo "Creating 64-bit installer..."
+script_file=Installers/windows/ChowMatrix_Install_Script.iss
+sed -i "s/##APPVERSION##/${version}/g" $script_file
+iscc $script_file
+
+# create installer (32-bit)
+echo "Creating 32-bit installer..."
+script_file=Installers/windows/ChowMatrix_Install_Script_32bit.iss
+sed -i "s/##APPVERSION##/${version}/g" $script_file
 iscc $script_file
 
 # copy installer to products
-cp installers/windows/"ChowMatrix-Win-$version.exe" ../products/
+cp installers/windows/"ChowMatrix-Win-64bit-$version.exe" ../products/
+cp installers/windows/"ChowMatrix-Win-32bit-$version.exe" ../products/

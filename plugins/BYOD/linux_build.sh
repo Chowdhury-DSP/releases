@@ -17,7 +17,7 @@ git checkout "$hash"
 git submodule update --init --recursive
 
 # build Win64
-cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
+cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DBUILD_RELEASE=ON
 cmake --build build --config Release --parallel 4
 
 # create installer
@@ -45,7 +45,7 @@ Provides: vst-plugin
 Section: sound
 Priority: optional
 Description: Build-your-own guitar distortion effect.
- BYOD includes VST3, LV2, and Standalone formats.
+ BYOD includes VST3, LV2, CLAP, and Standalone formats.
 EOT
 
 touch "${name}/usr/share/${name}/doc/changelog.Debian"
@@ -68,12 +68,14 @@ cp LICENSE "${name}/usr/share/${name}/doc/copyright"
 # cp -R build/BYOD_artefacts/Release/VST/BYOD.so "${name}/usr/lib/vst/"
 cp -R build/BYOD_artefacts/Release/VST3/BYOD.vst3 "${name}/usr/lib/vst3/"
 cp -R build/BYOD_artefacts/Release/LV2/BYOD.lv2 "${name}/usr/lib/lv2/"
+cp -R build/BYOD_artefacts/Release/CLAP/BYOD.clap "${name}/usr/lib/clap/"
 cp -R build/BYOD_artefacts/Release/Standalone/BYOD "${name}/usr/bin/"
 
 # set permissions
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/vst3/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
+find "${name}/usr/lib/clap/" -type f -iname "*.so" -exec chmod 0644 {} +
 chmod -R 0755 "${name}/usr/bin/BYOD"
 
 echo "----- LIBRARY CONTENTS -----"

@@ -37,11 +37,13 @@ mkdir -p bin/Win32
 cp -R "build/${name}_artefacts/Release/Standalone/${name}.exe" "bin/Win64/${name}.exe"
 cp -R "build/${name}_artefacts/Release/VST/${name}.dll" "bin/Win64/${name}.dll"
 cp -R "build/${name}_artefacts/Release/VST3/${name}.vst3" "bin/Win64/${name}.vst3"
+cp -R "build/${name}_artefacts/Release/CLAP/${name}.clap" "bin/Win64/${name}.clap"
 echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Win64/${name}.aaxplugin "bin/Win64/${name}.aaxplugin"
 
 cp -R "build32/${name}_artefacts/Release/Standalone/${name}.exe" "bin/Win32/${name}.exe"
 cp -R "build32/${name}_artefacts/Release/VST/${name}.dll" "bin/Win32/${name}.dll"
 cp -R "build32/${name}_artefacts/Release/VST3/${name}.vst3" "bin/Win32/${name}.vst3"
+cp -R "build32/${name}_artefacts/Release/CLAP/${name}.clap" "bin/Win32/${name}.clap"
 
 # extract version for installer
 version=$(cut -f 2 -d '=' <<< "$(grep 'CMAKE_PROJECT_VERSION:STATIC' build/CMakeCache.txt)")

@@ -26,6 +26,7 @@ version=$(cut -f 2 -d '=' <<< "$(grep 'CMAKE_PROJECT_VERSION:STATIC' build/CMake
 echo "Version: ${version}"
 
 mkdir -p "${name}/usr/lib/vst3"
+mkdir -p "${name}/usr/lib/clap"
 # mkdir -p "${name}/usr/lib/vst"
 mkdir -p "${name}/usr/lib/lv2"
 mkdir -p "${name}/usr/bin"

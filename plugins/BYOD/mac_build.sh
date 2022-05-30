@@ -36,7 +36,7 @@ mkdir -p bin/Mac
 cp -R "build/${name}_artefacts/Release/Standalone/${name}.app" "bin/Mac/${name}.app"
 cp -R "build/${name}_artefacts/Release/VST/${name}.vst" "bin/Mac/${name}.vst"
 cp -R "build/${name}_artefacts/Release/VST3/${name}.vst3" "bin/Mac/${name}.vst3"
-cp -R "build/${name}_artefacts/Release/CLAP/${name}.vst3" "bin/Mac/${name}.clap"
+cp -R "build/${name}_artefacts/Release/CLAP/${name}.clap" "bin/Mac/${name}.clap"
 cp -R "build/${name}_artefacts/Release/AU/${name}.component" "bin/Mac/${name}.component"
 echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Mac/${name}.aaxplugin "bin/Mac/${name}.aaxplugin"
 

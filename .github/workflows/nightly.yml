@@ -72,6 +72,7 @@ jobs:
       run: bash plugins/BYOD/win_build.sh
       env:
         CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
+        OUR_GITHUB_PAT: ${{ secrets.OUR_GITHUB_PAT }}
 
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release
@@ -194,6 +195,7 @@ jobs:
         TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
         CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
+        OUR_GITHUB_PAT: ${{ secrets.OUR_GITHUB_PAT }}
 
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release
@@ -276,6 +278,8 @@ jobs:
     - name: Build BYOD
       if: contains(toJson(github.event.commits), 'BYOD')
       run: bash plugins/BYOD/linux_build.sh
+      env:
+        OUR_GITHUB_PAT: ${{ secrets.OUR_GITHUB_PAT }}
 
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release

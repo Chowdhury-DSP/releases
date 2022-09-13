@@ -22,7 +22,7 @@ PASSWORD="$OUR_GITHUB_PAT"
 add_ons_repo="https://github.com/Chowdhury-DSP/BYOD-add-ons"
 
 add_ons_repo_with_pass="${add_ons_repo:0:8}$USERNAME:$PASSWORD@${add_ons_repo:8}"
-git clone $add_ons_repo modules/BYOD-add-ons
+git clone $add_ons_repo_with_pass modules/BYOD-add-ons
 
 # build 64-bit
 cmake -Bbuild -DBYOD_BUILD_ADD_ON_MODULES=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_RELEASE=ON

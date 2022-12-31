@@ -37,6 +37,7 @@ cp -R "build/${name}_artefacts/Release/Standalone/${name}.app" "bin/Mac/${name}.
 cp -R "build/${name}_artefacts/Release/VST/${name}.vst" "bin/Mac/${name}.vst"
 cp -R "build/${name}_artefacts/Release/VST3/${name}.vst3" "bin/Mac/${name}.vst3"
 cp -R "build/${name}_artefacts/Release/AU/${name}.component" "bin/Mac/${name}.component"
+cp -R "build/${name}_artefacts/Release/CLAP/${name}.clap" "bin/Mac/${name}.clap"
 
 # create installer
 echo "Creating installer..."

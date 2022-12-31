@@ -80,7 +80,7 @@ cp -R build/ChowKick_artefacts/Release/Standalone/ChowKick "${name}/usr/bin/"
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/vst3/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
-find "${name}/usr/lib/clap/" -type f -iname "*.so" | xargs chmod 0644 {} +
+find "${name}/usr/lib/clap/" -type f -iname "*.so" -exec chmod 0644 {} +
 chmod -R 0755 "${name}/usr/bin/ChowKick"
 
 echo "----- LIBRARY CONTENTS -----"

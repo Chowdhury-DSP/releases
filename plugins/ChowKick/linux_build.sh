@@ -31,7 +31,7 @@ echo "Version: ${version}"
 
 mkdir -p "${name}/usr/lib/vst3"
 # mkdir -p "${name}/usr/lib/vst"
-mkdir -p "${name}/usr/lib/lv2"
+# mkdir -p "${name}/usr/lib/lv2"
 mkdir -p "${name}/usr/lib/clap"
 mkdir -p "${name}/usr/bin"
 mkdir -p "${name}/usr/share/${name}/doc"
@@ -72,14 +72,14 @@ cp -R res/tuning_library "${name}/usr/share/${name}/"
 # copy plugins bundles
 # cp -R build/ChowKick_artefacts/Release/VST/ChowKick.so "${name}/usr/lib/vst/"
 cp -R build/ChowKick_artefacts/Release/VST3/ChowKick.vst3 "${name}/usr/lib/vst3/"
-cp -R build/ChowKick_artefacts/Release/LV2/ChowKick.lv2 "${name}/usr/lib/lv2/"
+# cp -R build/ChowKick_artefacts/Release/LV2/ChowKick.lv2 "${name}/usr/lib/lv2/"
 cp -R build/ChowKick_artefacts/Release/CLAP/ChowKick.clap "${name}/usr/lib/clap/"
 cp -R build/ChowKick_artefacts/Release/Standalone/ChowKick "${name}/usr/bin/"
 
 # set permissions
 # find "${name}/usr/lib/vst/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/vst3/" -type f -iname "*.so" | xargs chmod 0644
-find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
+# find "${name}/usr/lib/lv2/" -type f -iname "*.so" | xargs chmod 0644
 find "${name}/usr/lib/clap/" -type f -iname "*.so" -exec chmod 0644 {} +
 chmod -R 0755 "${name}/usr/bin/ChowKick"
 

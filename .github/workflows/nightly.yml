@@ -74,6 +74,12 @@ jobs:
         CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
         OUR_GITHUB_PAT: ${{ secrets.OUR_GITHUB_PAT }}
 
+    - name: Build ChowMultiTool
+      if: contains(toJson(github.event.commits), 'ChowMultiTool')
+      run: bash plugins/ChowMultiTool/win_build.sh
+      env:
+        CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
+
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -197,6 +203,14 @@ jobs:
         CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
         OUR_GITHUB_PAT: ${{ secrets.OUR_GITHUB_PAT }}
 
+    - name: Build ChowMultiTool
+      if: contains(toJson(github.event.commits), 'ChowMultiTool')
+      run: bash plugins/ChowMultiTool/mac_build.sh
+      env:
+        TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
+        CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
+
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -244,6 +258,9 @@ jobs:
     - name: Install Linux Deps
       if: runner.os == 'Linux'
       run: |
+        sudo apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-12 main"
+        sudo apt update
+        sudo apt install clang-12 -y
         sudo apt-get update
         sudo apt install libasound2-dev libcurl4-openssl-dev libx11-dev libxinerama-dev libxext-dev libfreetype6-dev libwebkit2gtk-4.0-dev libglu1-mesa-dev libjack-jackd2-dev lv2-dev
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
@@ -280,6 +297,10 @@ jobs:
       run: bash plugins/BYOD/linux_build.sh
       env:
         OUR_GITHUB_PAT: ${{ secrets.OUR_GITHUB_PAT }}
+
+    - name: Build ChowMultiTool
+      if: contains(toJson(github.event.commits), 'ChowMultiTool')
+      run: bash plugins/ChowMultiTool/linux_build.sh
 
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release

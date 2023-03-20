@@ -258,6 +258,7 @@ jobs:
     - name: Install Linux Deps
       if: runner.os == 'Linux'
       run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-12 main"
         sudo apt update
         sudo apt install clang-12 -y

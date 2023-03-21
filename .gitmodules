@@ -16,3 +16,6 @@
 [submodule "plugins/ChowTape/AnalogTapeModel"]
 	path = plugins/ChowTape/AnalogTapeModel
 	url = https://github.com/jatinchowdhury18/AnalogTapeModel
+[submodule "plugins/ChowMultiTool/ChowMultiTool"]
+	path = plugins/ChowMultiTool/ChowMultiTool
+	url = https://github.com/Chowdhury-DSP/ChowMultiTool

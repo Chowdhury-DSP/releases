@@ -25,7 +25,7 @@ add_ons_repo_with_pass="${add_ons_repo:0:8}$USERNAME:$PASSWORD@${add_ons_repo:8}
 git clone $add_ons_repo_with_pass modules/BYOD-add-ons
 
 # build 64-bit
-cmake -Bbuild -DBYOD_BUILD_ADD_ON_MODULES=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_RELEASE=ON
+cmake -Bbuild -DBYOD_BUILD_ADD_ON_MODULES=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_RELEASE=ON -DCMAKE_CXX_COMPILER=g++-11
 cmake --build build --config Release --parallel 4
 
 # create installer

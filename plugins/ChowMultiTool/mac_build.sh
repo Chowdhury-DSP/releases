@@ -25,20 +25,19 @@ cmake -Bbuild -GXcode -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY="Developer ID A
     -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_STYLE="Manual" \
     -D"CMAKE_OSX_ARCHITECTURES=arm64;x86_64" \
     -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_INJECT_BASE_ENTITLEMENTS=NO \
-    -DCMAKE_XCODE_ATTRIBUTE_OTHER_CODE_SIGN_FLAGS="--timestamp" \
-    -DMACOS_RELEASE=ON
-cmake --build build --config Release --parallel 4 --target ChowMultiTool_Standalone ChowMultiTool_VST3 ChowMultiTool_CLAP ChowMultiTool_AU | xcpretty
+    -DCMAKE_XCODE_ATTRIBUTE_OTHER_CODE_SIGN_FLAGS="--timestamp"
+cmake --build build --config Release --parallel 4 --target ChowMultiTool_VST3 ChowMultiTool_CLAP ChowMultiTool_AU | xcpretty
 
 # copy builds to bin
 echo "Copying builds..."
 mkdir -p bin/Mac
 
-cp -R "build/${name}_artefacts/Release/Standalone/${name}.app" "bin/Mac/${name}.app"
+# cp -R "build/${name}_artefacts/Release/Standalone/${name}.app" "bin/Mac/${name}.app"
 # cp -R "build/${name}_artefacts/Release/VST/${name}.vst" "bin/Mac/${name}.vst"
 cp -R "build/${name}_artefacts/Release/VST3/${name}.vst3" "bin/Mac/${name}.vst3"
 cp -R "build/${name}_artefacts/Release/CLAP/${name}.clap" "bin/Mac/${name}.clap"
 cp -R "build/${name}_artefacts/Release/AU/${name}.component" "bin/Mac/${name}.component"
-# echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Mac/${name}.aaxplugin "bin/Mac/${name}.aaxplugin"
+echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Mac/${name}.aaxplugin "bin/Mac/${name}.aaxplugin"
 
 # create installer
 echo "Creating installer..."

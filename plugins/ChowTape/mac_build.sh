@@ -64,11 +64,7 @@ mkdir $pkg_dir
 productsign -s "$TEAM_ID" build/CHOWTapeModel.pkg $pkg_dir/CHOWTapeModel-signed.pkg
 
 echo "Notarizing installer package..."
-npx notarize-cli --file $pkg_dir/CHOWTapeModel-signed.pkg \
-    --bundle-id com.chowdsp.CHOWTapeModel \
-    --username chowdsp@gmail.com \
-    --password "$INSTALLER_PASS" \
-    --asc-provider "$TEAM_ID"
+xcrun notarytool submit --verbose --wait --apple-id chowdsp@gmail.com --password "$INSTALLER_PASS" --team-id "$TEAM_ID" $pkg_dir/CHOWTapeModel-signed.pkg
 
 echo "Building disk image..."
 vol_name=ChowTapeModel-Mac-$version

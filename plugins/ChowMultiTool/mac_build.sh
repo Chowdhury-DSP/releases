@@ -62,11 +62,7 @@ mkdir $pkg_dir
 productsign -s "$TEAM_ID" build/ChowMultiTool.pkg $pkg_dir/ChowMultiTool-signed.pkg
 
 echo "Notarizing installer package..."
-npx notarize-cli --file $pkg_dir/ChowMultiTool-signed.pkg \
-    --bundle-id com.chowdsp.ChowMultiTool \
-    --username chowdsp@gmail.com \
-    --password "$INSTALLER_PASS" \
-    --asc-provider "$TEAM_ID"
+xcrun notarytool submit --verbose --wait --apple-id chowdsp@gmail.com --password "$INSTALLER_PASS" --team-id "$TEAM_ID" $pkg_dir/ChowMultiTool-signed.pkg
 
 echo "Building disk image..."
 vol_name=ChowMultiTool-Mac-$version

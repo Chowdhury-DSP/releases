@@ -72,11 +72,6 @@ productsign -s "$TEAM_ID" build/BYOD.pkg $pkg_dir/BYOD-signed.pkg
 
 echo "Notarizing installer package..."
 xcrun notarytool submit --verbose --wait --apple-id chowdsp@gmail.com --password "$INSTALLER_PASS" --team-id "$TEAM_ID" $pkg_dir/BYOD-signed.pkg
-# npx notarize-cli --file $pkg_dir/BYOD-signed.pkg \
-#     --bundle-id com.chowdsp.BYOD \
-#     --username chowdsp@gmail.com \
-#     --password "$INSTALLER_PASS" \
-#     --asc-provider "$TEAM_ID"
 
 echo "Building disk image..."
 vol_name=BYOD-Mac-$version

@@ -31,11 +31,11 @@ sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMa
 
 # build Win64
 cmake -Bbuild -G"Visual Studio 16 2019" -A x64 -DBYOD_BUILD_ADD_ON_MODULES=ON -DBUILD_RELEASE=ON -DASIOSDK_DIR="${ASIO_SDK}"
-cmake --build build --config Release --parallel 4
+cmake --build build --config Release --parallel --target BYOD_Standalone BYOD_VST BYOD_VST3 BYOD_CLAP
 
 # build Win32
 cmake -Bbuild32 -G"Visual Studio 16 2019" -A Win32 -DBYOD_BUILD_ADD_ON_MODULES=ON -DBUILD_RELEASE=ON -DASIOSDK_DIR="${ASIO_SDK}"
-cmake --build build32 --config Release --parallel 4
+cmake --build build32 --config Release --parallel --target BYOD_Standalone BYOD_VST BYOD_VST3 BYOD_CLAP
 
 # copy builds to bin
 echo "Copying builds..."

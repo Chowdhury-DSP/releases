@@ -11,7 +11,8 @@ jobs:
   windows_release:
     name: Windows Nightly Release
     if: contains(toJson(github.event.commits), 'Update Nightlies')
-    runs-on: windows-2022-16core
+    runs-on:
+      labels: windows-2022-16core
 
     steps:
     - name: Checkout repo

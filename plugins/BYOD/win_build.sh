@@ -4,8 +4,8 @@ set -e
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"
-VST_SDK="C:${SDK_PATH:2}/VST2_SDK"
-ASIO_SDK="C:${SDK_PATH:2}/ASIO_SDK"
+VST_SDK="D:${SDK_PATH:2}/VST2_SDK"
+ASIO_SDK="D:${SDK_PATH:2}/ASIO_SDK"
 
 # clone git repo
 name=$(jq -r '.name' "$DIR/metadata.json")

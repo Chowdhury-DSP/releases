@@ -22,7 +22,7 @@ git submodule update --init --recursive
 sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
 
 # build Win64
-cmake -Bbuild -G"Visual Studio 16 2019" -T ClangCl
+cmake -Bbuild -G"Visual Studio 17 2022" -T ClangCl
 cmake --build build --config Release --parallel 4 --target ChowMultiTool_VST3 ChowMultiTool_CLAP
 
 # build Win32

@@ -22,6 +22,7 @@ git submodule update --init --recursive
 USERNAME="jatinchowdhury18"
 PASSWORD="$OUR_GITHUB_PAT"
 add_ons_repo="https://github.com/Chowdhury-DSP/BYOD-add-ons"
+jai_repo="https://github.com/Chowdhury-DSP/jai-minimal"
 
 add_ons_repo_with_pass="${add_ons_repo:0:8}$USERNAME:$PASSWORD@${add_ons_repo:8}"
 git clone $add_ons_repo_with_pass modules/BYOD-add-ons

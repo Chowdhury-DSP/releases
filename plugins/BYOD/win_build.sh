@@ -26,6 +26,9 @@ add_ons_repo="https://github.com/Chowdhury-DSP/BYOD-add-ons"
 add_ons_repo_with_pass="${add_ons_repo:0:8}$USERNAME:$PASSWORD@${add_ons_repo:8}"
 git clone $add_ons_repo_with_pass modules/BYOD-add-ons
 
+jai_repo_with_pass="${jai_repo:0:8}$USERNAME:$PASSWORD@${jai_repo:8}"
+git clone $jai_repo_with_pass modules/jai
+
 # set up SDK paths
 sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
 

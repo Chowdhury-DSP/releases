@@ -123,16 +123,10 @@ for p in "${plugins_to_update[@]}"; do
     if [[ "$update" -eq 0 ]]; then
         echo "Latest build created on $(date)" > $nightly_dir/${p}_Info.txt
         win_exe=$(cd $nightly_dir && ls $p*-Win-64bit*)
-	if [[ "$p" != "ChowMultiTool" ]]; then
-            win32_exe=$(cd $nightly_dir && ls $p*-Win-32bit*)
-	fi
         mac_dmg=$(cd $nightly_dir && ls $p*-Mac*)
         lin_deb=$(cd $nightly_dir && ls $p*-Linux*)
 
         sed -i -e "s/${p}.*Win-64bit.*.exe/$win_exe/g" ~/web/chowdspweb/nightly.js
-	if [[ "$p" != "ChowMultiTool" ]]; then
-            sed -i -e "s/${p}.*Win-32bit.*.exe/$win32_exe/g" ~/web/chowdspweb/nightly.js
-	fi
         sed -i -e "s/${p}.*Mac.*.dmg/$mac_dmg/g" ~/web/chowdspweb/nightly.js
         sed -i -e "s/${p}.*Linux.*.deb/$lin_deb/g" ~/web/chowdspweb/nightly.js
     fi

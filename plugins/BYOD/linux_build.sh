@@ -29,7 +29,7 @@ jai_repo_with_pass="${jai_repo:0:8}$USERNAME:$PASSWORD@${jai_repo:8}"
 git clone $jai_repo_with_pass modules/jai
 
 # build 64-bit
-cmake -Bbuild -DBYOD_BUILD_ADD_ON_MODULES=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_RELEASE=ON -DCMAKE_CXX_COMPILER=g++-11
+cmake -Bbuild -DBYOD_BUILD_ADD_ON_MODULES=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_RELEASE=ON -DCMAKE_C_COMPILER=clang-12 -DCMAKE_CXX_COMPILER=clang++-12
 cmake --build build --config Release --parallel 4
 
 # create installer

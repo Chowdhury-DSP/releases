@@ -67,6 +67,15 @@ script_file=Installers/windows/BYOD_Install_Script.iss
 sed -i "s/##APPVERSION##/${version}/g" $script_file
 iscc $script_file
 
+AzureSignTool sign \
+    -kvu "$AZURE_KEY_VAULT_URI" \
+    -kvi "$AZURE_CLIENT_ID" \
+    -kvt "$AZURE_TENANT_ID" \
+    -kvs "$AZURE_CLIENT_SECRET" \
+    -kvc "$AZURE_CERT_NAME" \
+    -tr http://timestamp.digicert.com \
+    -v "installers/windows/BYOD-Win-64bit-${version}.exe"
+
 # create installer (32-bit)
 # echo "Creating 32-bit installer..."
 # script_file=Installers/windows/BYOD_Install_Script_32bit.iss

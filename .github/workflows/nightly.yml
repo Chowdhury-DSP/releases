@@ -37,6 +37,9 @@ jobs:
       with:
         args: install innosetup
 
+    - name: Install AzureSignTool
+      run: dotnet tool install --global AzureSignTool
+
     - name: Setup Products directory
       run: mkdir products
 
@@ -73,6 +76,11 @@ jobs:
       env:
         CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
         OUR_GITHUB_PAT: ${{ secrets.OUR_GITHUB_PAT }}
+        AZURE_KEY_VAULT_URI: ${{ secrets.AZURE_KEY_VAULT_URI }}
+        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        AZURE_CERT_NAME: ${{ secrets.AZURE_CERT_NAME }}
+        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
     - name: Build ChowMultiTool
       if: contains(toJson(github.event.commits), 'ChowMultiTool')

@@ -22,11 +22,11 @@ cd Plugin
 sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
 
 # build Win64
-cmake -Bbuild -G"Visual Studio 16 2019" -A x64
+cmake -Bbuild -G"Visual Studio 17 2022" -A x64
 cmake --build build --config Release --parallel 4
 
 # build Win32
-cmake -Bbuild32 -G"Visual Studio 16 2019" -A Win32
+cmake -Bbuild32 -G"Visual Studio 17 2022" -A Win32
 cmake --build build32 --config Release --parallel 4
 
 # copy builds to bin
@@ -61,6 +61,24 @@ echo "Creating 32-bit installer..."
 script_file=Installers/windows/ChowTapeModel_Install_Script_32bit.iss
 sed -i "s/##APPVERSION##/${version}/g" $script_file
 iscc $script_file
+
+AzureSignTool sign \
+    -kvu "$AZURE_KEY_VAULT_URI" \
+    -kvi "$AZURE_CLIENT_ID" \
+    -kvt "$AZURE_TENANT_ID" \
+    -kvs "$AZURE_CLIENT_SECRET" \
+    -kvc "$AZURE_CERT_NAME" \
+    -tr http://timestamp.digicert.com \
+    -v "Installers/windows/ChowTapeModel-Win-${version}.exe"
+
+AzureSignTool sign \
+    -kvu "$AZURE_KEY_VAULT_URI" \
+    -kvi "$AZURE_CLIENT_ID" \
+    -kvt "$AZURE_TENANT_ID" \
+    -kvs "$AZURE_CLIENT_SECRET" \
+    -kvc "$AZURE_CERT_NAME" \
+    -tr http://timestamp.digicert.com \
+    -v "Installers/windows/ChowTapeModel-Win-32bit-${version}.exe"
 
 # copy installer to products
 cp Installers/windows/"ChowTapeModel-Win-$version.exe" ../../products/"ChowTapeModel-Win-64bit-$version.exe" 

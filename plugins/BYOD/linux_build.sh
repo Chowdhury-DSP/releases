@@ -21,12 +21,16 @@ USERNAME="jatinchowdhury18"
 PASSWORD="$OUR_GITHUB_PAT"
 add_ons_repo="https://github.com/Chowdhury-DSP/BYOD-add-ons"
 jai_repo="https://github.com/Chowdhury-DSP/jai-minimal"
+math_approx_repo="https://github.com/Chowdhury-DSP/math_approx"
 
 add_ons_repo_with_pass="${add_ons_repo:0:8}$USERNAME:$PASSWORD@${add_ons_repo:8}"
 git clone $add_ons_repo_with_pass modules/BYOD-add-ons
 
 jai_repo_with_pass="${jai_repo:0:8}$USERNAME:$PASSWORD@${jai_repo:8}"
 git clone $jai_repo_with_pass modules/jai
+
+math_approx_repo_with_pass="${math_approx_repo:0:8}$USERNAME:$PASSWORD@${math_approx_repo:8}"
+git clone $math_approx_repo_with_pass modules/math_approx
 
 # build 64-bit
 cmake -Bbuild -DBYOD_BUILD_ADD_ON_MODULES=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_RELEASE=ON -DCMAKE_CXX_COMPILER=g++-11

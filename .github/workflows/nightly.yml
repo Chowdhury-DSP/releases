@@ -119,7 +119,7 @@ jobs:
   macos_release:
     name: Mac Nightly Release
     if: contains(toJson(github.event.commits), 'Update Nightlies')
-    runs-on: macos-latest
+    runs-on: macos-13
 
     steps:
     - name: Checkout repo

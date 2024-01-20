@@ -93,6 +93,11 @@ jobs:
       run: bash plugins/ChowMultiTool/win_build.sh
       env:
         CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
+        AZURE_KEY_VAULT_URI: ${{ secrets.AZURE_KEY_VAULT_URI }}
+        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        AZURE_CERT_NAME: ${{ secrets.AZURE_CERT_NAME }}
+        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
     - name: Deploy Nightly Builds
       uses: garygrossgarten/github-action-scp@release

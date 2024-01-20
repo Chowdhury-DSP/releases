@@ -61,6 +61,15 @@ iscc $script_file
 # sed -i "s/##APPVERSION##/${version}/g" $script_file
 # iscc $script_file
 
+AzureSignTool sign \
+    -kvu "$AZURE_KEY_VAULT_URI" \
+    -kvi "$AZURE_CLIENT_ID" \
+    -kvt "$AZURE_TENANT_ID" \
+    -kvs "$AZURE_CLIENT_SECRET" \
+    -kvc "$AZURE_CERT_NAME" \
+    -tr http://timestamp.digicert.com \
+    -v "installers/windows/ChowMultiTool-Win-64bit-${version}.exe"
+
 # copy installer to products
 cp installers/windows/"ChowMultiTool-Win-64bit-$version.exe" ../products/
 # cp installers/windows/"ChowMultiTool-Win-32bit-$version.exe" ../products/

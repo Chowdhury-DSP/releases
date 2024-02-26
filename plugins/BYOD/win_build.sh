@@ -34,7 +34,9 @@ git clone $jai_repo_with_pass modules/jai
 sed -i -e "s~# juce_set_vst2_sdk_path.*~juce_set_vst2_sdk_path(${VST_SDK})~" CMakeLists.txt
 
 # build Win64
-cmake -Bbuild -G"Visual Studio 17 2022" -TClangCL -A x64 -DBYOD_BUILD_ADD_ON_MODULES=ON -DBUILD_RELEASE=ON -DASIOSDK_DIR="${ASIO_SDK}"
+cmake -Bbuild -G"Ninja Multi-Config" \
+    -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl \
+    -DBYOD_BUILD_ADD_ON_MODULES=ON -DBUILD_RELEASE=ON -DASIOSDK_DIR="${ASIO_SDK}"
 cmake --build build --config Release --parallel --target BYOD_Standalone BYOD_VST BYOD_VST3 BYOD_CLAP
 
 # build Win32

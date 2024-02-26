@@ -24,8 +24,17 @@ jobs:
         path: SDKs
         token: ${{ secrets.OUR_GITHUB_PAT }}
 
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
     - name: Get latest CMake
       uses: lukka/get-cmake@latest
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Setup MSVC devcmd
+      uses: ilammy/msvc-dev-cmd@v1
 
     - name: Choco Install PuTTy
       uses: crazy-max/ghaction-chocolatey@v1

@@ -52,6 +52,14 @@ cp -R "build/${name}_artefacts/Release/CLAP/${name}.clap" "bin/Mac/${name}.clap"
 cp -R "build/${name}_artefacts/Release/AU/${name}.component" "bin/Mac/${name}.component"
 echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Mac/${name}.aaxplugin "bin/Mac/${name}.aaxplugin"
 
+# Run auval
+echo "Running auval..."
+sudo cp -R -f "bin/Mac/${name}.component" "/Library/Audio/Plug-Ins/Components/${name}.component"
+auid=$(grep 'PLUGIN_CODE' CMakeLists.txt | sed s/"PLUGIN_CODE"// | tr -d ' ')
+killall -9 AudioComponentRegistrar
+auval -a
+auval -strict -v aufx ${auid} Chow
+
 # create installer
 echo "Creating installer..."
 script_file=installers/mac/BYOD.pkgproj

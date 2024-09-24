@@ -244,14 +244,16 @@ jobs:
         INSTALLER_PASS: ${{ secrets.MAC_INSTALLER_PASS }}
         CCRMA_PASS: ${{ secrets.CCRMA_PASS }}
 
+    # - name: Deploy Nightly Builds
+    #   uses: garygrossgarten/github-action-scp@release
+    #   with:
+    #     local: products
+    #     remote: Library/Web/chowdsp/nightly_plugins
+    #     host: ccrma-gate.stanford.edu
+    #     username: jatin
+    #     password: ${{ secrets.CCRMA_PASS }}
     - name: Deploy Nightly Builds
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: products
-        remote: Library/Web/chowdsp/nightly_plugins
-        host: ccrma-gate.stanford.edu
-        username: jatin
-        password: ${{ secrets.CCRMA_PASS }}
+      run: echo y | pscp -pw "${{ secrets.CCRMA_PASS }}" products/* "jatin@ccrma-gate.stanford.edu:/user/j/jatin/Library/Web/chowdsp/nightly_plugins"
 
     - name: Send email notification
       if: always()
@@ -337,17 +339,14 @@ jobs:
       if: contains(toJson(github.event.commits), 'ChowMultiTool')
       run: bash plugins/ChowMultiTool/linux_build.sh
 
-    # - name: Deploy Nightly Builds
-    #   uses: garygrossgarten/github-action-scp@release
-    #   with:
-    #     local: products
-    #     remote: Library/Web/chowdsp/nightly_plugins
-    #     host: ccrma-gate.stanford.edu
-    #     username: jatin
-    #     password: ${{ secrets.CCRMA_PASS }}
     - name: Deploy Nightly Builds
-      run: echo y | pscp -pw "${{ secrets.CCRMA_PASS }}" products/* "jatin@ccrma-gate.stanford.edu:/user/j/jatin/Library/Web/chowdsp/nightly_plugins"
-  
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: products
+        remote: Library/Web/chowdsp/nightly_plugins
+        host: ccrma-gate.stanford.edu
+        username: jatin
+        password: ${{ secrets.CCRMA_PASS }}
 
     - name: Send email notification
       if: always()

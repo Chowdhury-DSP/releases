@@ -52,9 +52,6 @@ jobs:
     - name: Setup Products directory
       run: mkdir products
 
-    # - name: Setup debug session
-    #   uses: mxschmitt/action-tmate@v3
-
     - name: Build ChowCentaur
       if: contains(toJson(github.event.commits), 'ChowCentaur')
       run: bash plugins/ChowCentaur/win_build.sh

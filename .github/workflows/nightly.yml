@@ -24,6 +24,13 @@ jobs:
         path: SDKs
         token: ${{ secrets.OUR_GITHUB_PAT }}
 
+    - name: Download AAX Builds
+      uses: actions/checkout@v2
+      with:
+        repository: Chowdhury-DSP/aax-builds-win64
+        path: aax_builds
+        token: ${{ secrets.OUR_GITHUB_PAT }}
+
     - name: Install Ninja
       uses: seanmiddleditch/gha-setup-ninja@master
 

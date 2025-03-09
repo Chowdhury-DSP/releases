@@ -4,6 +4,7 @@ set -e
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"
+AAX_BUILDS_PATH="$(pwd)/aax_builds"
 VST_SDK="D:${SDK_PATH:2}/VST2_SDK"
 ASIO_SDK="D:${SDK_PATH:2}/ASIO_SDK"
 
@@ -52,7 +53,7 @@ cp -R "build/${name}_artefacts/Release/Standalone/${name}.exe" "bin/Win64/${name
 cp -R "build/${name}_artefacts/Release/VST/${name}.dll" "bin/Win64/${name}.dll"
 cp -R "build/${name}_artefacts/Release/VST3/${name}.vst3" "bin/Win64/${name}.vst3"
 cp -R "build/${name}_artefacts/Release/CLAP/${name}.clap" "bin/Win64/${name}.clap"
-echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Win64/${name}.aaxplugin "bin/Win64/${name}.aaxplugin"
+cp -R "${AAX_BUILDS_PATH}/${name}.aaxplugin" "bin/Win64/${name}.aaxplugin"
 
 # cp -R "build32/${name}_artefacts/Release/Standalone/${name}.exe" "bin/Win32/${name}.exe"
 # cp -R "build32/${name}_artefacts/Release/VST/${name}.dll" "bin/Win32/${name}.dll"

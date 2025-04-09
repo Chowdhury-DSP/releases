@@ -5,6 +5,7 @@ set -e
 DIR=$(dirname "${BASH_SOURCE[0]}")
 SDK_PATH="$(pwd)/SDKs"
 VST_SDK="D:${SDK_PATH:2}/VST2_SDK"
+AAX_BUILDS_PATH="$(pwd)/aax_builds"
 
 # clone git repo
 name=$(jq -r '.name' "$DIR/metadata.json")
@@ -39,7 +40,10 @@ cp -R "build/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win64/${
 cp -R "build/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win64/${plugin}.dll"
 cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win64/${plugin}.vst3"
 cp -R "build/${plugin}_artefacts/Release/CLAP/${plugin}.clap" "bin/Win64/${plugin}.clap"
-echo y | pscp -pw "$CCRMA_PASS" -r jatin@ccrma-gate.stanford.edu:/user/j/jatin/aax_builds/Win64/${plugin}.aaxplugin "bin/Win64/${plugin}.aaxplugin"
+
+# @FIXME
+cp -R "build/${plugin}_artefacts/Release/VST3/${plugin}.vst3" "bin/Win64/${plugin}.aaxplugin"
+# cp -R "${AAX_BUILDS_PATH}/${name}.aaxplugin" "bin/Win64/${name}.aaxplugin"
 
 cp -R "build32/${plugin}_artefacts/Release/Standalone/${plugin}.exe" "bin/Win32/${plugin}.exe"
 cp -R "build32/${plugin}_artefacts/Release/VST/${plugin}.dll" "bin/Win32/${plugin}.dll"
